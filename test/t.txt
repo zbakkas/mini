@@ -1,0 +1,5 @@
+cat t.txt | grep "e" > out
+cat t.txt | grep "hello c" | wc -l
+hello
+12345
+abcdef
