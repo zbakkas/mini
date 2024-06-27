@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "min.h"
-#include <string.h>
+
 
 //cat t.txt | grep e  > out
 
@@ -42,7 +42,7 @@ static char *part(char *str, char *tokens)
 	i = 0;
 	re = 0;
 	if(!tokens)
-		return get_part(str,strlen(str));
+		return get_part(str,ft_strlen(str));
 	while (str[i])
 	{
 		l =0;
@@ -115,7 +115,7 @@ static char ** get_token_sorte(char *str, char **tokens,int c)
 {
 	char **re ;
 	// printf("%d\n",count_tokens(str,tokens));
-	re= (char **)malloc(c*sizeof(char *));
+	re= (char **)malloc((c+1)*sizeof(char *));
 	int x =0;
 	int i ;
 	int l;
@@ -164,14 +164,14 @@ char	**ft_split_str(char *str, char **tokens)
 	int c = count_tokens(str,tokens); //+1 ==> we have 2 token but parte is 3 
 	// printf("%d\n",c);
 	char **tk = get_token_sorte(str,tokens,c);
-	re= (char **)malloc((c+1)*sizeof(char *));
+	re= (char **)malloc((c+2)*sizeof(char *));
 	int x =0;
 	int i;
 	while (c--)
 	{
 		re[x]=part(str,tk[x]);
 		// printf("%s\n",re[x]);
-		str+=strlen(re[x]);
+		str+=ft_strlen(re[x]);
 		x++;
 	}
 	re[x++]=part(str,NULL);

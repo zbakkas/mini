@@ -9,6 +9,7 @@ int	main(int argc, char **argv, char **envp)
 	t[2]="<<";
 	t[3]=">>";
 	t[4]=">";
+	t[5]=NULL;
 	t_args args;
 	while (1)
 	{

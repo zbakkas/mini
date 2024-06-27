@@ -1,1 +1,3 @@
 gcc  test.c ft_split_str.c get_all_args.c  get_env_realine.c libft/libft.a -lreadline   split_args.c 
+
+-fsanitize=address 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "min.h"
-#include <string.h>
+
 
 void get_all(char *line,char **t,t_args *args)
 {
@@ -24,10 +24,10 @@ void get_all(char *line,char **t,t_args *args)
     int x =0;
     while(ft_split_str(line,t)[x])
         x++;
-    args->cmd = (char **)malloc(x*sizeof(char *));
-    args->flag = (char **)malloc(x*sizeof(char *));
-    args->dependes = (char **)malloc(x*sizeof(char *));
-    args->token = (char **)malloc(x*sizeof(char *));
+    args->cmd = (char **)malloc((x+1)*sizeof(char *));
+    args->flag = (char **)malloc((x+1)*sizeof(char *));
+    args->dependes = (char **)malloc((x+1)*sizeof(char *));
+    args->token = (char **)malloc((x+1)*sizeof(char *));
     while(ft_split_str(line,t)[i])
     {
         
@@ -40,6 +40,10 @@ void get_all(char *line,char **t,t_args *args)
         i++;
     }
 
+        args->cmd[i]=NULL;
+        args->flag[i]=NULL;
+        args->dependes[i]=NULL;
+        args->token[i]=NULL;
 
 }
 
