@@ -12,24 +12,24 @@
 
 #include "min.h"
 
-t_args	*ft_lstnew_one(char *cmd,char * flag,char *token,char * dependes)
+t_args_n	*ft_lstnew_one(t_args args, int i)
 {
-	t_args	*new_node;
+	t_args_n	*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_args_n));
 	if (!new_node)
 		return (NULL);
-	new_node->cmd = cmd;
-    new_node->flag = flag;
-	new_node->token = token;
-	new_node->dependes = dependes;
+	new_node->cmd = args.cmd[i];
+    new_node->flag = args.flag[i];
+	new_node->token = args.token[i];
+	new_node->dependes = args.dependes[i];
 	// new_node->out = out;
-	// new_node->next = NULL;
+	new_node->next = NULL;
 	return (new_node);
 }
-void	ft_lstadd_backk(t_args **lst, t_args *new)
+void	ft_lstadd_backk(t_args_n **lst, t_args_n *new)
 {
-	t_args	*re;
+	t_args_n	*re;
 
 	if (!lst || !new)
 		return ;

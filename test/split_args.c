@@ -84,8 +84,10 @@ char *get_flages(char *str)
         i++;
     }
     str+=i;
-    // printf("%d",i);
     int c =count_flages(str);
+    // printf("%d\n",c);
+    if(c ==0 )
+        return NULL;
     re =malloc(c+1);
     while (c>x)
     {
@@ -99,13 +101,15 @@ char *get_flages(char *str)
 int count_dep(char *str)
 {
     int i =0;
-    if(str[0]=='"')
+    
+    while (str[i])
     {
-        str++;
-        return count_cdm(str,'"');
+        if(str[i]=='|' || str[i]=='>' || str[i]=='<')
+            break;
+        i++;
+
     }
-    else
-        return count_cdm(str,' ');
+    return i;
     
 }
 char *get_dependes(char *str)
@@ -114,7 +118,11 @@ char *get_dependes(char *str)
     int c;
     int i =0;
     int x =0;
-    while (str[i] ==' ')
+    while (str[i])
+        if(str[i++]=='-')
+            return NULL;
+    i =0;
+    while ( str[i] == ' ')
         i++;
     while (str[i])
     {
@@ -122,15 +130,41 @@ char *get_dependes(char *str)
             break;
         i++;
     }
+    while ( str[i] == ' ')
+        i++;
+    // printf("%s\n",str+i);
+
+
+    // while (str[i])
+    // {
+    //     while (str[i] ==' ')
+    //         i++;
+
+    //     while (str[i])
+    //     {
+    //         if(str[i]==' ')
+    //             break;
+    //         i++;
+    //     }
+    //     if(str[i]=='-' || str[i]=='|' || str[i]=='>' || str[i]=='<')
+    //     {
+
+    //     }
+    //     i++;
+    // }
+    
+  
     if(str[i]==' ')
         str+=i+1;
     else
         str+=i;
     
     c = count_dep(str);
+    if(c ==0)
+        return NULL;
+    // printf("%d\n",c);
     re =malloc(c+1);
-    if(str[0]=='"')
-        str++;
+    
     while (c>x)
     {
         re[x]=str[x];
@@ -138,7 +172,6 @@ char *get_dependes(char *str)
     }
     
     re[x]='\0';
-    // printf("%d\n",c);
     // printf(">%s<\n",str);
      return re;
 }
@@ -203,5 +236,5 @@ char *get_token(char *str)
 
 // int main()
 // {
-//     printf("%s<\n",get_token("echo hello txt <"));
+//     printf("+%s+\n",get_dependes("ls txt  fd | out"));
 // }

@@ -1,3 +1,4 @@
-gcc  test.c ft_split_str.c get_all_args.c  get_env_realine.c libft/libft.a -lreadline   split_args.c 
+gcc  test.c ft_split_str.c get_all_args.c  get_env_realine.c libft/libft.a -lreadline   split_args.c  new_node.c  print_list.c clear_list.c
+
 
 -fsanitize=address 

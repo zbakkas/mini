@@ -13,7 +13,7 @@
 #include "min.h"
 
 
-void get_all(char *line,char **t,t_args *args)
+void get_all(char *line,char **t,t_args *args,t_args_n **args_n)
 {
     
 
@@ -44,6 +44,14 @@ void get_all(char *line,char **t,t_args *args)
         args->flag[i]=NULL;
         args->dependes[i]=NULL;
         args->token[i]=NULL;
+
+    i =0;
+    while(ft_split_str(line,t)[i])
+    {
+        ft_lstadd_backk(args_n,ft_lstnew_one(*args,i));
+        i++;
+    }
+
 
 }
 
