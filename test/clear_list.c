@@ -1,31 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   clear_list.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-27 20:10:36 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-06-27 20:10:36 by zbakkas          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 
 #include "min.h"
 
+
 void	clear_list(t_args_n **lst)
 {
 	t_args_n	*nexttte;
-
+    int i =0;
 	if (!lst)
 		return ;
 	while (*lst)
 	{
+        i =0;
 		nexttte = (*lst)->next;
         free((*lst)->cmd);
-        free((*lst)->flag);
-        free((*lst)->token);
-        free((*lst)->dependes);
+        free((*lst)->arguments);
+        while ((*lst)->flags[i])
+        {
+            free((*lst)->flags[i++]);
+        }
+        free((*lst)->flags);
 		free(*lst);
 		*lst = nexttte;
 	}

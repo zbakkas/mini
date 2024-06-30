@@ -3,14 +3,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {    
-    char **t =(char **)malloc(6*sizeof(char *));
-	t[0]="|";
-	t[1]="<";
-	t[2]="<<";
-	t[3]=">>";
-	t[4]=">";
-	t[5]=NULL;
-	t_args args;
+    char **str = NULL;
+	// t_args args;
 	t_args_n *args_n =NULL;
 	while (1)
 	{
@@ -18,20 +12,18 @@ int	main(int argc, char **argv, char **envp)
 		char	*line = readline(get_str_redline());
 		if(line[0])
 		{
-			get_all(line,t,&args,&args_n);
-    		// int i =0;
-			// while (args.cmd[i])
-			// {
-			// 	printf("cmd==>\033[0;32m%s\033[0m<==\n",args.cmd[i]);
-			// 	printf("flag==>\033[0;32m%s\033[0m<==\n",args.flag[i]);
-			// 	printf("depends==>\033[0;32m%s\033[0m<==\n",args.dependes[i]);
-			// 	printf("token==>\033[0;32m%s\033[0m<==\n",args.token[i]);
-			// 	printf("-----------------------\n");
-			// 	printf("cmd==>\033[0;32m%s\033[0m<==\n",args_n->cmd);
-			// 	i++;
-			// }
+			str = ft_split_pip(line,'|');
+			int  i =0;
+			while (str[i])
+			{
+				printf("%d,%s\n",i,str[i]);
+				ft_lstadd_backk(&args_n,ft_lstnew_one(str[i++]));
+				
+			}
 			ft_lstiterr(args_n,f);
+			// printf("%s\n",args_n->next->flags[i]);
 		}
+		// free_to_pin(str);
 		if (!strcmp(line, "exit"))
 			exit(0);
 		
