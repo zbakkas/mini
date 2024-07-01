@@ -3,21 +3,43 @@
 #include "min.h"
 
 
-
 int chacke_q(char *str,int x)
 {
     int i =0;
-    int l=0;
+    char q = '\0';
+    // printf("ss==%s=\n",str);
+    while (str[i] && x> i )
+    {
+    
+        if(str[i]=='\'')
+        {
+            q ='\'';
+            break;
+        }
+        if (str[i]=='"')
+        {
+            q ='"';
+            break;
+        }
+        i++;
+        
+    }
+    i =0;
     while (x)
     {
-        if(str[x]=='\'')
+        if(ft_strlen(str)>=x)
+        {
+        if(str[x]&& str[x]==q)
             i++;
-        if(str[x]=='"')
-            l++;
+        // if(str[x]=='"')
+        //     l++;
+        }
         x--;
 
     }
-    if(i%2==0 && l%2==0)
+    if(str[0]==q)
+        i++;
+    if(i%2==0)
         return 0;
     else
         return 1;
@@ -33,6 +55,7 @@ char *set_speece(char *str)
     char *re;
     int x =0;
     int i=0;
+    int l =0;
     while (str[x])
     {
         
@@ -52,10 +75,11 @@ char *set_speece(char *str)
     // printf("%s\n",str);
     while (str[x])
     {
-        if(str[x] &&(str[x]=='>' || str[x]=='<')&& !chacke_q(str,x))
+        if(str[x] &&(str[x]=='>' || str[x]=='<')&& !chacke_q(str+l,x))
         {
             // printf("+");
             re[i++]=' ';
+           
             while(str[x] && (str[x]=='<' || str[x]=='>'))
             {
                 // printf("%c",str[x]);
@@ -64,7 +88,7 @@ char *set_speece(char *str)
             }
             // printf("+");
             re[i++]=' ';
-            
+            l =x;
             
         }
         // printf("%c",str[x]);
@@ -89,6 +113,7 @@ static	int	c_word(char  *s, char c)
 
 	x = 0;
 	re = 0;
+    int l =0;
 	if (!s[x])
 		return (0);
 	if (s[x] && c == '\0')
@@ -99,8 +124,12 @@ static	int	c_word(char  *s, char c)
 		return (0);
 	while (s[x])
 	{
-		if (c == s[x] && c != s[x + 1] && x < ft_strlen(s) - 1 && !chacke_q(s,x))
+        // printf("s===%s\n",s+l);
+		if (c == s[x] && c != s[x + 1] && x < ft_strlen(s) - 1 && !chacke_q(s+l,x-l))
+        {
 			re++;
+            l = x;
+        }
 		x++;
 	}
 	return (re + 1);
@@ -109,23 +138,47 @@ static	char	*word(char  *s, char c, int *x)
 {
 	int		i;
 	char	*re;
-	int		j;
+	int		j=0;
+    char    q;
 
 	i = 0;
 	while (s[*x] == c)
 		(*x)++;
-	while (s[(*x) + i]  )
+    // printf("s==%s\n",s+*x);
+    while(s[*x+i])
     {
-        if(!chacke_q(s,*x +i) && s[(*x) + i] == c)
+        if(s[*x+i]=='"'||s[*x+i]=='\'')
+        {
+            q=s[*x+i];
             break;
+        }
+        i++;
+    }
+    i=0;
+	while (s[(*x) + i] )
+    {
+
+
+        if(!chacke_q(s+*x,i) && s[(*x) + i] == c)
+            break;
+        if(s[(*x) + i] == q)
+            j++;
+  
+
 		i++;
     }
-	re = malloc (i + 1);
+    printf("%d , %d\n",i,j);
+	re = malloc ((i -j)+ 1);
 	if (!re)
 		return (NULL);
 	j = 0;
-	while (i > j)
-		re[j++] = s[(*x)++];
+	while (i)
+    {
+        if(s[*x]!=q)
+		    re[j++] = s[(*x)];
+        (*x)++;
+        i--;
+    }
 	re[j] = '\0';
 	return (re);
 }
@@ -163,15 +216,17 @@ char **split_part(char *s)
 
 int main()
 {
-    char *str ="ls \"\" -a \"\" -l";
-    char *str1 ="l\"s\" \"hello worde\"  \"-l -a\" \"\">\"\" out";
-    char *str2 ="l\"s\"< \"hello  >> worde\"  \"-l -a\">> out >f";
-   printf("%s\n", set_speece(str));
-char ** str3 =split_part(set_speece(str));
+    char *str0 ="ls \"\" -a \"\" -l";
+    char *str1 ="l\"s\"> \"hello  <'worde\"  \"-l -a\" \"\">\"\" 'out'";
+    char *str2 ="l\"s\"< 'hello  \">> worde'  \"-l -a\">> out >f";
+    char *str3 ="'cat'< \" min '2\" -e";
+    printf("%s\n",str1);
+   printf("%s\n", set_speece(str1));
+char ** str =split_part(set_speece(str1));
 int x =0;
-while (str3[x])
+while (str[x])
 {
-    printf("%s\n",str3[x]);
+    printf("%s\n",str[x]);
     x++;
 }
 
