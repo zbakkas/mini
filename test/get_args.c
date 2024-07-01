@@ -3,26 +3,76 @@
 
 #include "min.h"
 
+static char get_q(char *str)
+{
+    char q = '\0';
+    int x =0;
+    while (str[x])
+    {
+        if(str[x]=='\'')
+            q = '\'';
+        if(str[x]=='"')
+            q='"';
+        if(str[x]=='\''||str[x]=='"')
+            return q;  
+        x++;
+    }
+    return q;
+}
+//<<file" "  ls" k"
 char *get_cmd(char *str)
 {
     char *re;
     int x =0;
     int i =0;
+    int j =0;
+    bool in_quotes = false;
     while (str[x] && str[x] == ' ')
         x++;
-    
-    while (str[x])
+
+    if (str[x]=='<' || str[x]=='>')
     {
-        if(str[x] == ' ' || str[x] =='<' || str[x]=='>')
-            break;
-        x++;
+        while (str[x] && str[x] != ' ')
+            x++;
+        while (str[x] && str[x] == ' ')
+            x++;
+        while (str[x])
+        {
+            if((str[x] == ' ' || str[x] =='<' || str[x]=='>' ))
+                break;
+
+            x++;
+        }
+
+
+        
     }
-    // printf()
-    re =malloc(x +1);
-    while (i < x)
+    while (str[x] && str[x] == ' ')
+        x++;
+
+    printf("%s\n",str+x);
+    while (str[x+j])
     {
-        re[i]=str[i];
-        i++;
+        if (str[x+j] == get_q(str) ) 
+            in_quotes = !in_quotes;
+        if((str[x+j] == ' ' || str[x+j] =='<' || str[x+j]=='>' )&& !in_quotes)
+            break;
+        // x++;
+        j++;
+    }
+   
+// printf("%s,%d\n",str+x,j);
+
+
+
+    
+    
+    // printf()
+    re =malloc(j +1);
+    while (i < j)
+    {
+        re[i++]=str[x++];
+        // i++;
     }
     re[i] ='\0';
     return re;
@@ -239,15 +289,15 @@ char *get_argumants(char *str)
 }
 
 
-// int main()
-// {
-//     int x =0;
-//     char ** str =get_flages("ls -a -l");
-//     // printf("%s\n",get_argumants("grep out -e '[o,g]'"));
-//     while (str[x])
-//     {
-//            printf("%s\n",str[x++]);
+int main()
+{
+    int x =0;
+    char * str =get_cmd(" <<file" "  ls\" k\"");
+    printf("-%s-\n",str);
+    // while (str[x])
+    // {
+    //        printf("%s\n",str[x++]);
 
-//     }
+    // }
     
-// }
+}

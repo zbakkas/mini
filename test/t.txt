@@ -4,11 +4,47 @@ ls > out -l
 grep -l "t.txtk" out1
 grep out -e '[o,g]'
 grep -l "t.txt"
+
+
+
 echo 1 000 > out2
 echo hello >> out
 cat < out1
 cat out > out1
-cat file > out >>out1 >out2
+cat file > out >>out1 << out2 > out3 
+
+
+toke[0] > 
+file[0] out 
+
+token[1] >>
+file[1] out1
+
+toke[2] < 
+file[3] out2 
+
+token[3] >
+file[3] out2
+________
+
+cat = cmd
+file = arg
+outfile[][] = {"out", false,  | "out1", true,  | "out3", false}
+infiles[][] = {"out2",  true}
+
+
+
+
+<"mini 2" "wc '-l'"
+
+ 
+
+
+
+
+
+
+
 grep 1 < out1 <out2
 cat file > out >>out1 >out2 | /bin/cat << stop > out3
 >123
