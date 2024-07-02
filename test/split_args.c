@@ -3,25 +3,69 @@
 #include "min.h"
 
 
+// int chacke_q(char *str,int x)
+// {
+//     int i =0;
+//     char q = '\0';
+//     // printf("ss==%s=\n",str);
+//     while (str[i] && x> i )
+//     {
+    
+//         if(str[i]=='\'')
+//         {
+//             q ='\'';
+//             break;
+//         }
+//         if (str[i]=='"')
+//         {
+//             q ='"';
+//             break;
+//         }
+//         i++;
+        
+//     }
+//     i =0;
+//     while (x)
+//     {
+//         if(ft_strlen(str)>=x)
+//         {
+//         if(str[x]&& str[x]==q)
+//             i++;
+//         // if(str[x]=='"')
+//         //     l++;
+//         }
+//         x--;
+
+//     }
+//     if(str[0]==q)
+//         i++;
+//     if(i%2==0)
+//         return 0;
+//     else
+//         return 1;
+    
+// }
+
 int chacke_q(char *str,int x)
 {
     int i =0;
     char q = '\0';
     // printf("ss==%s=\n",str);
-    while (str[i] && x> i )
+    int j =x;
+    while (j)
     {
     
-        if(str[i]=='\'')
+        if(str[j]=='\'')
         {
             q ='\'';
             break;
         }
-        if (str[i]=='"')
+        if (str[j]=='"')
         {
             q ='"';
             break;
         }
-        i++;
+        j--;
         
     }
     i =0;
@@ -45,7 +89,6 @@ int chacke_q(char *str,int x)
         return 1;
     
 }
-
 
 
 
@@ -167,7 +210,7 @@ static	char	*word(char  *s, char c, int *x)
 
 		i++;
     }
-    printf("%d , %d\n",i,j);
+    // printf("%d , %d\n",i,j);
 	re = malloc ((i -j)+ 1);
 	if (!re)
 		return (NULL);
@@ -219,10 +262,10 @@ int main()
     char *str0 ="ls \"\" -a \"\" -l";
     char *str1 ="l\"s\"> \"hello  <'worde\"  \"-l -a\" \"\">\"\" 'out'";
     char *str2 ="l\"s\"< 'hello  \">> worde'  \"-l -a\">> out >f";
-    char *str3 ="'cat'< \" min '2\" -e";
-    printf("%s\n",str1);
-   printf("%s\n", set_speece(str1));
-char ** str =split_part(set_speece(str1));
+    char *str3 ="'cat'\"<\" \" min '2\" -e";
+    printf("%s\n",str3);
+   printf("%s\n", set_speece(str3));
+char ** str =split_part(set_speece(str3));
 int x =0;
 while (str[x])
 {
