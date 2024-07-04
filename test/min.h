@@ -58,6 +58,8 @@ char * get_str_redline();
 
 char	**ft_split_pip(char  *s, char c);
 char **split_part(char *s);
+char *set_speece( char *str) ;
+
 
 char *get_argumants(char *str);
 char **get_flages(char *str);

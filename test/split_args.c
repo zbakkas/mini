@@ -3,149 +3,86 @@
 #include "min.h"
 
 
-// int chacke_q(char *str,int x)
-// {
-//     int i =0;
-//     char q = '\0';
-//     // printf("ss==%s=\n",str);
-//     while (str[i] && x> i )
-//     {
-    
-//         if(str[i]=='\'')
-//         {
-//             q ='\'';
-//             break;
-//         }
-//         if (str[i]=='"')
-//         {
-//             q ='"';
-//             break;
-//         }
-//         i++;
-        
-//     }
-//     i =0;
-//     while (x)
-//     {
-//         if(ft_strlen(str)>=x)
-//         {
-//         if(str[x]&& str[x]==q)
-//             i++;
-//         // if(str[x]=='"')
-//         //     l++;
-//         }
-//         x--;
 
-//     }
-//     if(str[0]==q)
-//         i++;
-//     if(i%2==0)
-//         return 0;
-//     else
-//         return 1;
-    
-// }
-
-int chacke_q(char *str,int x)
+typedef struct  s_quote
 {
-    int i =0;
-    char q = '\0';
-    // printf("ss==%s=\n",str);
-    int j =x;
-    while (j)
-    {
-    
-        if(str[j]=='\'')
-        {
-            q ='\'';
-            break;
-        }
-        if (str[j]=='"')
-        {
-            q ='"';
-            break;
-        }
-        j--;
-        
-    }
-    i =0;
-    while (x)
-    {
-        if(ft_strlen(str)>=x)
-        {
-        if(str[x]&& str[x]==q)
-            i++;
-        // if(str[x]=='"')
-        //     l++;
-        }
-        x--;
+    int inDoubleQuote ;
+    int inSingleQuote ;
 
+}t_quote;
+
+static int chacke_q(char c,t_quote *q)
+{
+
+
+    if (c == '"' && !q->inSingleQuote) 
+    {
+        q->inDoubleQuote = !q->inDoubleQuote;
     }
-    if(str[0]==q)
-        i++;
-    if(i%2==0)
+    else if (c == '\'' && !q->inDoubleQuote) 
+    {
+       q->inSingleQuote = !q->inSingleQuote;
+    }
+    
+    if(!q->inDoubleQuote && !q->inSingleQuote)
+    {
         return 0;
+    }
     else
+    {
         return 1;
-    
+    }
 }
-
-
-
 //   l"s" "hello  >>worde"'>'  "-l -a"> out
-char *set_speece(char *str)
+
+
+
+char *set_speece( char *str) 
 {
     char *re;
-    int x =0;
-    int i=0;
-    int l =0;
-    while (str[x])
+    int x = 0;
+    int i = 0;
+    t_quote q = {0, 0};
+    
+    // First pass: calculate new length
+    int newLen = ft_strlen(str);
+    while (str[x]) 
     {
-        
-        if((str[x]=='>' || str[x]=='<')&& !chacke_q(str,x))
+        if (!chacke_q(str[x], &q) && (str[x] == '>' || str[x] == '<')) 
         {
-            while(str[x] && (str[x]=='<' || str[x]=='>'))
-                x++;
-            i++;
-        }
-        x++;
-    }
-    // printf("%d\n",x+(i*2));
-
-    re = malloc(x+(i*2)+1);
-    x =0;
-    i =0;
-    // printf("%s\n",str);
-    while (str[x])
-    {
-        if(str[x] &&(str[x]=='>' || str[x]=='<')&& !chacke_q(str+l,x))
-        {
-            // printf("+");
-            re[i++]=' ';
-           
-            while(str[x] && (str[x]=='<' || str[x]=='>'))
-            {
-                // printf("%c",str[x]);
-                re[i++]=str[x];
+            newLen += 2; // add space before and after
+            while (str[x] == '>' || str[x] == '<') {
                 x++;
             }
-            // printf("+");
-            re[i++]=' ';
-            l =x;
-            
-        }
-        // printf("%c",str[x]);
-        re[i++]=str[x];
-        x++;
+        } 
+        else 
+            x++;
+        
     }
-    // printf("\n");
-    re[i]='\0';
-    // printf("%d\n",i);
 
+    re = malloc(newLen + 1);
+
+    // Second pass: construct the new string
+    x = 0;
+    q.inDoubleQuote = 0;
+    q.inSingleQuote = 0;
+    while (str[x]) 
+    {
+        if (!chacke_q(str[x], &q) && (str[x] == '>' || str[x] == '<'))
+        {
+            re[i++] = ' ';
+            while (str[x] == '>' || str[x] == '<') 
+            {
+                re[i++] = str[x++];
+            }
+            re[i++] = ' ';
+        } 
+        else 
+            re[i++] = str[x++];
+    }
+
+    re[i] = '\0';
     return re;
-
-
-
 }
 
 
@@ -153,10 +90,14 @@ static	int	c_word(char  *s, char c)
 {
 	size_t	x;
 	int		re;
+    t_quote q;
+    q.inDoubleQuote =0;
+    q.inSingleQuote=0;
+    
+
 
 	x = 0;
 	re = 0;
-    int l =0;
 	if (!s[x])
 		return (0);
 	if (s[x] && c == '\0')
@@ -167,11 +108,15 @@ static	int	c_word(char  *s, char c)
 		return (0);
 	while (s[x])
 	{
-        // printf("s===%s\n",s+l);
-		if (c == s[x] && c != s[x + 1] && x < ft_strlen(s) - 1 && !chacke_q(s+l,x-l))
+        // printf("sss===%s\n",s+l);
+
+
+		if ( !chacke_q(s[x],&q) &&c == s[x] && c != s[x + 1] && x < ft_strlen(s) - 1 )
         {
 			re++;
-            l = x;
+            // printf("cc\n");
+    
+            // printf("l==%d\n",l);
         }
 		x++;
 	}
@@ -181,47 +126,29 @@ static	char	*word(char  *s, char c, int *x)
 {
 	int		i;
 	char	*re;
-	int		j=0;
-    char    q;
+	int		j;
+    t_quote q;
+    q.inDoubleQuote =0;
+    q.inSingleQuote=0;
+    
 
 	i = 0;
 	while (s[*x] == c)
 		(*x)++;
     // printf("s==%s\n",s+*x);
-    while(s[*x+i])
+	while (s[(*x) + i]  )
     {
-        if(s[*x+i]=='"'||s[*x+i]=='\'')
-        {
-            q=s[*x+i];
+        if(!chacke_q(s[*x+i],&q) && s[(*x) + i] == c)
             break;
-        }
-        i++;
-    }
-    i=0;
-	while (s[(*x) + i] )
-    {
-
-
-        if(!chacke_q(s+*x,i) && s[(*x) + i] == c)
-            break;
-        if(s[(*x) + i] == q)
-            j++;
-  
-
 		i++;
     }
-    // printf("%d , %d\n",i,j);
-	re = malloc ((i -j)+ 1);
+    // printf("%d , %d\n",i,*x);
+	re = malloc (i + 1);
 	if (!re)
 		return (NULL);
 	j = 0;
-	while (i)
-    {
-        if(s[*x]!=q)
-		    re[j++] = s[(*x)];
-        (*x)++;
-        i--;
-    }
+	while (i > j)
+		re[j++] = s[(*x)++];
 	re[j] = '\0';
 	return (re);
 }
@@ -257,21 +184,22 @@ char **split_part(char *s)
 
 
 
-int main()
-{
-    char *str0 ="ls \"\" -a \"\" -l";
-    char *str1 ="l\"s\"> \"hello  <'worde\"  \"-l -a\" \"\">\"\" 'out'";
-    char *str2 ="l\"s\"< 'hello  \">> worde'  \"-l -a\">> out >f";
-    char *str3 ="'cat'\"<\" \" min '2\" -e";
-    printf("%s\n",str3);
-   printf("%s\n", set_speece(str3));
-char ** str =split_part(set_speece(str3));
-int x =0;
-while (str[x])
-{
-    printf("%s\n",str[x]);
-    x++;
-}
+
+// int main()
+// {
+//     char *str0 ="ls \"\" -a \"\" -l";
+//     char *str1 ="l\"s\"> \"hello  <'worde\"  \"-l -a\" \"\">\"\" 'out'";
+//     char *str2 ="l\"s\"< 'hello  \">> worde'  \"-l -a\">> out >f";
+//     char *str3 ="'cat'\"<\" \" min '2\" -e";
+//     printf("%s\n",str3);
+//    printf("%s\n", set_speece(str3));
+// char ** str =split_part(set_speece(str3));
+// int x =0;
+// while (str[x])
+// {
+//     printf("%s\n",str[x]);
+//     x++;
+// }
 
 
-}
+// }

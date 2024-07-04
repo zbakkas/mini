@@ -3,6 +3,7 @@ cat t.txt | grep "hello c" | wc -l
 ls > out -l
 grep -l "t.txtk" out1
 grep out -e '[o,g]'
+grep out2  '[o,g]' -e 
 grep -l "t.txt"
 
 
@@ -12,6 +13,7 @@ echo hello >> out
 cat < out1
 cat out > out1
 cat file > out >>out1 << out2 > out3 
+cat file > out >>out1 << stop out2 > out3 -e
 
 
 toke[0] > 
@@ -69,6 +71,14 @@ awk 'BEGIN{for(i=1;i<=1000000;i++)print int(i)}' | awk '{sum+=$1} END {print sum
 cat < out1 > out1
 printf '#include <unistd.h>\nint main(){write(1, \"2\\n\", 2);}' > file.c
 gcc file.c -o  a.out
+
+\
+
+> out cat -e out1 ==>  cat -e out1 > out
+
+
+>  -e cat  -e> out1
+>  -e cat  > out1
 
 
 
