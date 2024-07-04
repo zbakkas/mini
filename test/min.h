@@ -29,15 +29,17 @@ typedef struct s_args
 
 typedef struct s_inp
 {
-    char **inp;
+    char *inp;
     bool is_h;
+    // char *stop;
 
 } t_inp;
 
 typedef struct s_out
 {
-    char **out;
+    char *out;
     bool is_a;
+    int null;
 
 } t_out;
 

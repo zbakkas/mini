@@ -289,15 +289,15 @@ char *get_argumants(char *str)
 }
 
 
-int main()
-{
-    int x =0;
-    char * str =get_cmd(" <<file" "  ls\" k\"");
-    printf("-%s-\n",str);
-    // while (str[x])
-    // {
-    //        printf("%s\n",str[x++]);
+// int main()
+// {
+//     int x =0;
+//     char * str =get_cmd(" <<file" "  ls\" k\"");
+//     printf("-%s-\n",str);
+//     // while (str[x])
+//     // {
+//     //        printf("%s\n",str[x++]);
 
-    // }
+//     // }
     
-}
+// }

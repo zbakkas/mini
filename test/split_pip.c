@@ -156,11 +156,13 @@ char	**ft_split_pip(char  *s, char c)
 
 
 //     int x =0;
+// 	char *str ="> out cat -e out1 | wc -c" ;
+// 	printf("cmd = %s\n",str);
 
-//     while (ft_split_pip("echo \'cat lol.c | cat > lol.c\" \" | \' wc -c | ffld" ,'|')[x])
+//     while (ft_split_pip(str,'|')[x])
 //     {
 
-//     printf("%s\n",ft_split_pip("echo \'cat lol.c | cat > lol.c\" \" | \' wc -c | ffld" ,'|')[x]);
+//     	printf("%s\n",ft_split_pip(str ,'|')[x]);
 //         x++;
 //     }
     
