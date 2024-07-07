@@ -1,3 +1,3 @@
-gcc test.c  get_args.c  get_env_realine.c  split_pip.c  set_list.c print_list.c  libft/libft.a clear_list.c -lreadline
+gcc test.c get_args2.c set_list.c split_args.c split_pip.c   clear_list.c get_env_realine.c print_list.c libft/libft.a -lreadline 
 
 -fsanitize=address 

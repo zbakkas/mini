@@ -14,6 +14,8 @@ cat < out1
 cat out > out1
 cat file > out >>out1 << out2 > out3 
 cat file > out >>out1 << stop out2 > out3 -e
+cat file > out >>out1 << stop out3 out2 > out4 -e
+cat file > out >> out1 << stop out2 out3
 
 
 toke[0] > 
@@ -79,6 +81,11 @@ gcc file.c -o  a.out
 
 >  -e cat  -e> out1
 >  -e cat  > out1
+
+
+cat <<  out2  -e
+cat <<stop  out2   -e
+> out >> out1 cat -e > out2
 
 
 

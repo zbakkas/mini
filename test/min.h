@@ -19,19 +19,10 @@
 #include <stdbool.h>
 
 
-typedef struct s_args
-{
-    char *cmd;
-    char **flags;
-    char *arguments;
-} t_args;
-
-
 typedef struct s_inp
 {
     char *inp;
     bool is_h;
-    // char *stop;
 
 } t_inp;
 
@@ -39,7 +30,6 @@ typedef struct s_out
 {
     char *out;
     bool is_a;
-    int null;
 
 } t_out;
 
@@ -47,11 +37,9 @@ typedef struct s_out
 
 typedef struct s_args_n
 {
-    char *cmd;
-    char **flags;
-    char *arguments;
-    t_inp inp;
-    t_out out;
+    char **arguments;
+    t_inp *inp;
+    t_out *out;
     struct s_args_n *next;
 } t_args_n;
 
@@ -63,13 +51,15 @@ char **split_part(char *s);
 char *set_speece( char *str) ;
 
 
-char *get_argumants(char *str);
-char **get_flages(char *str);
-char *get_cmd(char *str);
+// char *get_argumants(char *str);
+// char **get_flages(char *str);
+// char *get_cmd(char *str);
+char **get_args(char **str);
+t_out *get_out(char **str);
+t_inp *get_inp(char **str);
 
-
+t_args_n *initialization_list(char *line);
 void	ft_lstadd_backk(t_args_n **lst, t_args_n *new);
-t_args_n	*ft_lstnew_one(char *str);
-void f(char *name,char *str);
-void	ft_lstiterr(t_args_n *lst, void (*f)(char *, char *));
+t_args_n	*ft_lstnew_one(char **str);
+void	ft_lstiterr(t_args_n *lst);
 void	clear_list(t_args_n **lst);

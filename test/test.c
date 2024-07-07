@@ -12,15 +12,16 @@ int	main(int argc, char **argv, char **envp)
 		char	*line = readline(get_str_redline());
 		if(line[0])
 		{
-			str = ft_split_pip(line,'|');
-			int  i =0;
-			while (str[i])
-			{
-				printf("%d,%s\n",i,str[i]);
-				ft_lstadd_backk(&args_n,ft_lstnew_one(str[i++]));
+			args_n =initialization_list(line);
+			// str = ft_split_pip(line,'|');
+			// int  i =0;
+			// while (str[i])
+			// {
+			// 	printf("%d,%s\n",i,str[i]);
+			// 	ft_lstadd_backk(&args_n,ft_lstnew_one(str[i++]));
 				
-			}
-			ft_lstiterr(args_n,f);
+			// }
+			ft_lstiterr(args_n);
 			// printf("%s\n",args_n->next->flags[i]);
 		}
 		// free_to_pin(str);
