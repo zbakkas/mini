@@ -44,7 +44,15 @@ infiles[][] = {"out2",  true}
  
 
 
-
+echo "fkfk $ARG ff"
+echo 'fkfk $ARG ff'
+echo  $"ARG"
+echo  $'ARG'
+echo '$ARG'
+echo "$ARG"
+echo  $ARG'gg'
+echo "ddk'$ARG'"
+echo 'ddk"$ARG"'
 
 
 

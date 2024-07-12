@@ -19,6 +19,13 @@
 #include <stdbool.h>
 
 
+# define PIPE_ERROR ": syntax error near unexpected token `|'"
+# define TOKENS_ERROR ": syntax error near unexpected token `newline'"
+# define QUOTES_ERROR ": unexpected EOF while looking for matching"
+# define AMBIGUOUS_ERROR ": ambiguous redirect"
+// # define SPACE_REDIRECTION_ERROR ": No such file or directory"
+
+
 typedef struct s_inp
 {
     char *inp;
@@ -54,6 +61,7 @@ char *set_speece( char *str) ;
 // char *get_argumants(char *str);
 // char **get_flages(char *str);
 // char *get_cmd(char *str);
+char *change_var(char * str);
 char **get_args(char **str);
 t_out *get_out(char **str);
 t_inp *get_inp(char **str);

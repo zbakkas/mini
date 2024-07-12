@@ -8,11 +8,12 @@ int	main(int argc, char **argv, char **envp)
 	t_args_n *args_n =NULL;
 	while (1)
 	{
-		clear_list(&args_n);
+		
 		char	*line = readline(get_str_redline());
 		if(line[0])
 		{
 			args_n =initialization_list(line);
+			// chake_error(args_n);
 			// str = ft_split_pip(line,'|');
 			// int  i =0;
 			// while (str[i])
@@ -22,6 +23,9 @@ int	main(int argc, char **argv, char **envp)
 				
 			// }
 			ft_lstiterr(args_n);
+			clear_list(&args_n);
+			// char *user = getenv("ARG");
+			// printf("%s\n",user);
 			// printf("%s\n",args_n->next->flags[i]);
 		}
 		// free_to_pin(str);
