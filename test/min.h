@@ -26,6 +26,14 @@
 // # define SPACE_REDIRECTION_ERROR ": No such file or directory"
 
 
+
+typedef struct s_envp
+{
+	char			*env;
+	struct  s_envp	*prev;
+	struct  s_envp	*next;
+}                   t_envp;
+
 typedef struct s_inp
 {
     char *inp;
@@ -61,12 +69,12 @@ char *set_speece( char *str) ;
 // char *get_argumants(char *str);
 // char **get_flages(char *str);
 // char *get_cmd(char *str);
-char *change_var(char * str);
+char *change_var(char * str,t_envp *env);
 char **get_args(char **str);
 t_out *get_out(char **str);
 t_inp *get_inp(char **str);
 
-t_args_n *initialization_list(char *line);
+t_args_n *initialization_list(char *line,t_envp *env);
 void	ft_lstadd_backk(t_args_n **lst, t_args_n *new);
 t_args_n	*ft_lstnew_one(char **str);
 void	ft_lstiterr(t_args_n *lst);

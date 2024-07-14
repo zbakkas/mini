@@ -4,6 +4,21 @@
 #include "min.h"
 
 
+static char  * search_env(t_envp *env, char *str)
+{
+	char	*s1;
+	int		len_str;
+
+	len_str = ft_strlen(str);
+	while (env)
+	{
+		if (!ft_strncmp(env->env, str, len_str) && *(env->env + len_str) == '=')
+			return (env->env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
 static char *get_var(char *str,int *j)
 {
     char *re;
@@ -48,7 +63,7 @@ static char *get_var(char *str,int *j)
 }
 
 
-char *change_var(char * str)
+char *change_var(char * str,t_envp *env)
 {
     char *re;
     int x =0;
@@ -86,7 +101,7 @@ char *change_var(char * str)
             else   
             {
                 // printf("v=%s\n",(get_var(str+x)));
-                var = getenv(get_var(str+x,&x));
+                var = search_env(env,get_var(str+x,&x));
                 i+=ft_strlen(var);
                 // printf("%s",var);
             
@@ -140,7 +155,7 @@ char *change_var(char * str)
             {
                 j =0;
                 // printf("v=%s\n",(get_var(str+x)));
-                var = getenv(get_var(str+x,&x));
+                var = search_env(env,get_var(str+x,&x));
                 while (var && var[j])
                 {
                     re[i++]=var[j++];

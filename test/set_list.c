@@ -44,10 +44,10 @@ void	ft_lstadd_backk(t_args_n **lst, t_args_n *new)
 
 
 
-t_args_n *initialization_list(char *line)
+t_args_n *initialization_list(char *line,t_envp *env)
 {
 	t_args_n *list =NULL;
-	char * change_var_str = change_var(line);
+	char * change_var_str = change_var(line,env);
 	char **split_p = ft_split_pip(change_var_str,'|');
 	// char **str =split_part(set_speece(str3));
 	int x= 0;
