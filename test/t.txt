@@ -42,7 +42,7 @@ infiles[][] = {"out2",  true}
 <"mini 2" "wc '-l'"
 
  
-
+export ARG="echo | ls' -l >  "
 
 echo "fkfk $ARG ff"
 echo 'fkfk $ARG ff'
@@ -53,6 +53,7 @@ echo "$ARG"
 echo  $ARG'gg'
 echo "ddk'$ARG'"
 echo 'ddk"$ARG"'
+echo  "$ARG'gg'"
 
 
 

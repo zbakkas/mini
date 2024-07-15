@@ -2,6 +2,7 @@ CC =cc
 CFLAGS = #-Wall -Wextra -Werror
 RM = rm -f
 NAME = mini
+F = -fsanitize=address 
 
 
 SRC =  test.c get_args2.c set_list.c split_args.c split_pip.c   clear_list.c get_env_realine.c print_list.c change_var.c
@@ -13,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 all:$(NAME)
 
 $(NAME):$(OBJ)
-	$(CC) $(CFLAGS)  $(OBJ) libft/libft.a -lreadline -fsanitize=address  -o $(NAME) 
+	$(CC) $(CFLAGS)  $(OBJ) libft/libft.a -lreadline $(F) -o $(NAME) 
 
 
 

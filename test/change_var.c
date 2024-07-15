@@ -13,13 +13,13 @@ static char  * search_env(t_envp *env, char *str)
 	while (env)
 	{
 		if (!ft_strncmp(env->env, str, len_str) && *(env->env + len_str) == '=')
-			return (env->env);
+			return (env->env+len_str+1);
 		env = env->next;
 	}
 	return (NULL);
 }
 
-static char *get_var(char *str,int *j)
+static char *get_valu_of_var(char *str,int *j)
 {
     char *re;
     int x =0;
@@ -63,14 +63,15 @@ static char *get_var(char *str,int *j)
 }
 
 
-char *change_var(char * str,t_envp *env)
+char *change_var(char * str)
 {
     char *re;
     int x =0;
     int q=0;
     int qq=0;
-    char * var;
+    char * var= NULL;
     int i=0;
+    int  j =0;
 
     while (str[x])
     {
@@ -91,7 +92,7 @@ char *change_var(char * str,t_envp *env)
         }
     // printf("%c",str[x]);
         // printf("\nq=%c|\n",q);
-        if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ')
+       if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
         {
             if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))
             {
@@ -100,10 +101,28 @@ char *change_var(char * str,t_envp *env)
             }
             else   
             {
-                // printf("v=%s\n",(get_var(str+x)));
-                var = search_env(env,get_var(str+x,&x));
+                // printf("v=%s\n",(get_valu_of_var(str+x)));
+                // var = search_env(env,get_valu_of_var(str+x,&x));
+                var = getenv(get_valu_of_var(str+x,&x));
+                // printf("dd%s\n",var);
                 i+=ft_strlen(var);
-                // printf("%s",var);
+                ///"| c   qw 23"
+                j =0;
+                if(q!='"')
+                    i++;
+                while (q!='"'&&var && var[j])
+                {
+                    if(j-1>=0&&q!='"' && var[j-1]==' ' &&var[j]!=' ')
+                        i++;
+                    // if(j-1>=0&&q!='"' && var[j-1]!=' ' &&var[j]==' ')
+                    //     re[i++]='"';
+                    
+                    if(q!='"' && var[j]!=' ' &&(var[j+1]==' '|| var[j+1]=='\0'))
+                        i++;
+                    j++;
+                }
+                
+                
             
                 
             }
@@ -118,13 +137,15 @@ char *change_var(char * str,t_envp *env)
         x++;
         
     }
-    // printf("%d\n",i);
+    printf("%d\n",i);
+    // if(q!='"')
+    //     i+=2;
     re =malloc (i+1);
     x =0;
     i =0;
     q=0;
     qq=0;
-    int j =0;
+     j =0;
     while (str[x])
     {
         if (str[x] == '\'' ||  str[x] == '"') 
@@ -144,7 +165,7 @@ char *change_var(char * str,t_envp *env)
         }
     // printf("%c",str[x]);
         // printf("\nq=%c|\n",q);
-        if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ')
+        if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
         {
             if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))
             {
@@ -154,12 +175,27 @@ char *change_var(char * str,t_envp *env)
             else   
             {
                 j =0;
-                // printf("v=%s\n",(get_var(str+x)));
-                var = search_env(env,get_var(str+x,&x));
+                // printf("v=%s\n",(get_valu_of_var(str+x)));
+                var = getenv(get_valu_of_var(str+x,&x));
+                // var = search_env(env,get_valu_of_var(str+x,&x));
+                if(q!='"')
+                    re[i++]='"';
                 while (var && var[j])
                 {
-                    re[i++]=var[j++];
+                    if(j-1>=0&&q!='"' && var[j-1]==' ' &&var[j]!=' ')
+                        re[i++]='"';
+                    // if(j-1>=0&&q!='"' && var[j-1]!=' ' &&var[j]==' ')
+                    //     re[i++]='"';
+                    re[i++]=var[j];
+                    if(q!='"' && var[j]!=' ' &&(var[j+1]==' '|| var[j+1]=='\0'))
+                        re[i++]='"';
+                    j++;
                 }
+
+                // string   |
+                // string|
+                // if(q!='"')
+                //     re[i++]='"';
                 
             
                 
@@ -181,7 +217,9 @@ char *change_var(char * str,t_envp *env)
 
 // int main()
 // {
-//     char *str  = "ll dd$ARG\"d\"";
+//     t_envp *env=NULL;
+//     char *str  = "ll $$ $ARG dd";
+//     char *ss= "ll $$ \"echo\" \"|\" \"ls'\" '-l\"    \">\"    \"'\"  \"cat\"   dd";
 //     printf("%s\n",str);
 //     printf("%s\n",change_var(str));
 // }
