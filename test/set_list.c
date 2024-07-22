@@ -47,9 +47,20 @@ void	ft_lstadd_backk(t_args_n **lst, t_args_n *new)
 t_args_n *initialization_list(char *line,t_envp *env)
 {
 	t_args_n *list =NULL;
-	char * change_var_str = change_var(line);
-	printf("%s\n",change_var_str);
+	int err=0;
+	char * change_var_str = change_var(line,&err);
+	// printf("%s\n",change_var_str);
+	if(check_errors(line,err))
+		return NULL;
 	char **split_p = ft_split_pip(change_var_str,'|');
+
+
+	// int  j =0;
+	// while (split_p[j])
+	// {
+	// 	printf("spl=%s\n",split_p[j++]);
+	// }
+	
 	// char **str =split_part(set_speece(str3));
 	int x= 0;
 	while (split_p[x])

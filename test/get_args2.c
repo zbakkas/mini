@@ -77,6 +77,7 @@ char *whithout_q(char *str)
             {
 
                 q =0;
+               // qq=0;///////ad
                 // x++;
 
             }
@@ -94,6 +95,8 @@ char *whithout_q(char *str)
         
     }
     re[c]='\0';
+    // if(q!=0 && (qq=='"'||qq=='\''))
+    //     printf("minishell: unexpected EOF while looking for matching '%c'\n",qq);
     
 
     return re;
@@ -287,6 +290,8 @@ t_out *get_out(char **str)
     {
         if((!ft_strncmp(str[x],">",2)||!ft_strncmp(str[x],">>",3))&& str[x+1])
         {
+            
+  
             if(!ft_strncmp(str[x],">",2))
             {
                 out[c].out= whithout_q( str[x+1]);
@@ -332,6 +337,8 @@ t_inp *get_inp(char **str)
     {
         if((!ft_strncmp(str[x],"<",2)||!ft_strncmp(str[x],"<<",3) )&& str[x+1])
         {
+
+  
             if(!ft_strncmp(str[x],"<",2))
             {
                 

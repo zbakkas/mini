@@ -56,7 +56,7 @@ echo 'ddk"$ARG"'
 echo  "$ARG'gg'"
 
 
-
+cat | cat < in | << lim cat > ou | ls -la > > ou1
 
 grep 1 < out1 <out2
 cat file > out >>out1 >out2 | /bin/cat << stop > out3

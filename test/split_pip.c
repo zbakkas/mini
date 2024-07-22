@@ -46,7 +46,7 @@ static	int	c_word( char *s, char c)
 	{
         if (s[x] == get_q(s) ) 
             in_quotes = !in_quotes;
-		if (c == s[x]&& !in_quotes && c != s[x + 1] && x < ft_strlen(s) - 1)
+		if (c == s[x]&& !in_quotes && c != s[x + 1] )
 			re++;
 		x++;
 	}

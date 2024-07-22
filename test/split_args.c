@@ -4,14 +4,11 @@
 
 
 
-typedef struct  s_quote
-{
-    int inDoubleQuote ;
-    int inSingleQuote ;
 
-}t_quote;
 
-static int chacke_q(char c,t_quote *q)
+
+ 
+int chacke_q(char c,t_quote *q)
 {
 
 
@@ -28,10 +25,16 @@ static int chacke_q(char c,t_quote *q)
     {
         return 0;
     }
-    else
+    else if(!q->inDoubleQuote && q->inSingleQuote)
     {
-        return 1;
+        return 1;///'
     }
+    else if(q->inDoubleQuote && !q->inSingleQuote)
+    {
+        return 2;///"
+    }
+    else
+        return 3;
 }
 //   l"s" "hello  >>worde"'>'  "-l -a"> out
 

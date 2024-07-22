@@ -63,7 +63,7 @@ static char *get_valu_of_var(char *str,int *j)
 }
 
 
-char *change_var(char * str)
+char *change_var(char * str,int *err)
 {
     char *re;
     int x =0;
@@ -104,7 +104,7 @@ char *change_var(char * str)
                 // printf("v=%s\n",(get_valu_of_var(str+x)));
                 // var = search_env(env,get_valu_of_var(str+x,&x));
                 var = getenv(get_valu_of_var(str+x,&x));
-                // printf("dd%s\n",var);
+                // // printf("dd%s\n",var);
                 i+=ft_strlen(var);
                 ///"| c   qw 23"
                 j =0;
@@ -137,7 +137,7 @@ char *change_var(char * str)
         x++;
         
     }
-    printf("%d\n",i);
+    // printf("%d\n",i);
     // if(q!='"')
     //     i+=2;
     re =malloc (i+1);
@@ -167,18 +167,71 @@ char *change_var(char * str)
         // printf("\nq=%c|\n",q);
         if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
         {
-            if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))
+            if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))//|$ |
             {
                 // if((str[x+1]=='"' || str[x+1]=='\''))
                 //     x++;
             }
             else   
             {
-                j =0;
+
+
+
+
+
+                j =x;
                 // printf("v=%s\n",(get_valu_of_var(str+x)));
+               
                 var = getenv(get_valu_of_var(str+x,&x));
+
+
+                /////error
+
+                int l =0;
+                int k =0;
+                while (var &&var[l])
+                {
+                    if(var[l]==' ')
+                    {
+                        k =1;
+                        break;
+                    }
+                    l++;
+                }
+                l =j;
+                if (q!='"'&&  str[x])
+                {
+                    while (l>=0)
+                    {
+                        
+                        l--;
+                        //  printf("%c\n",str[l]);   
+                        if((str[l]=='>'||str[l]=='<' ))
+                        {
+                            if((!var || k))
+                                *err = 1;
+                        }
+
+                        if(str[l]!=' ')
+                            break;
+                        
+
+
+                        
+                    }
+                    
+                    
+
+                    
+                    
+                }
+                
+
+
+                //////////
                 // var = search_env(env,get_valu_of_var(str+x,&x));
-                if(q!='"')
+                j =0;
+                if( var && var[j] && q!='"')
                     re[i++]='"';
                 while (var && var[j])
                 {
