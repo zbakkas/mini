@@ -3,28 +3,30 @@
 #include "min.h"
 
 
-static char get_q(char *str)
-{
-    char q = '\0';
-    int x =0;
-    while (str[x])
-    {
-        if(str[x]=='\'')
-            q = '\'';
-        if(str[x]=='"')
-            q='"';
-        if(str[x]=='\''||str[x]=='"')
-            return q;  
-        x++;
-    }
-    return q;
-}
+// static char get_q(char *str)
+// {
+//     char q = '\0';
+//     int x =0;
+//     while (str[x])
+//     {
+//         if(str[x]=='\'')
+//             q = '\'';
+//         if(str[x]=='"')
+//             q='"';
+//         if(str[x]=='\''||str[x]=='"')
+//             return q;  
+//         x++;
+//     }
+//     return q;
+// }
 
 static	int	c_word( char *s, char c)
 {
 	size_t	x;
 	int		re;
-    bool in_quotes = false;
+    // bool in_quotes = false;
+	t_quote q={0,0};
+
 
 	x = 0;
 	re = 0;
@@ -44,9 +46,7 @@ static	int	c_word( char *s, char c)
 		return (0);
 	while (s[x])
 	{
-        if (s[x] == get_q(s) ) 
-            in_quotes = !in_quotes;
-		if (c == s[x]&& !in_quotes && c != s[x + 1] )
+		if (!chacke_q(s[x],&q)&&c == s[x] && c != s[x + 1] )
 			re++;
 		x++;
 	}
@@ -72,7 +72,8 @@ static	char	*word(char  *s, char c, int *x)
 	int		i;
 	char	*re;
 	int		j;
-    bool in_quotes = false;
+    // bool in_quotes = false;
+	t_quote q={0,0};
 
 	i = 0;
         // char q;
@@ -93,10 +94,8 @@ static	char	*word(char  *s, char c, int *x)
 		(*x)++;
 	while (s[(*x) + i])
     {
-        if (s[(*x) + i] == c && (!in_quotes || !get_q(s+*x)))
+        if (!chacke_q(s[(*x) + i],&q)&&s[(*x) + i] == c )
             break;
-        if (s[(*x)+i] == get_q(s+*x) ) 
-            in_quotes = !in_quotes;
 		i++;
     }
     // printf("i==%d\n",i);

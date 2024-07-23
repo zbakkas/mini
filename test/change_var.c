@@ -103,7 +103,9 @@ char *change_var(char * str,int *err)
             {
                 // printf("v=%s\n",(get_valu_of_var(str+x)));
                 // var = search_env(env,get_valu_of_var(str+x,&x));
-                var = getenv(get_valu_of_var(str+x,&x));
+                char *ss= get_valu_of_var(str+x,&x);
+                var = getenv(ss);
+                free(ss);
                 // // printf("dd%s\n",var);
                 i+=ft_strlen(var);
                 ///"| c   qw 23"
@@ -182,7 +184,9 @@ char *change_var(char * str,int *err)
                 j =x;
                 // printf("v=%s\n",(get_valu_of_var(str+x)));
                
-                var = getenv(get_valu_of_var(str+x,&x));
+                char *ss= get_valu_of_var(str+x,&x);
+                var = getenv(ss);
+                free(ss);
 
 
                 /////error
