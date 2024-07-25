@@ -13,7 +13,7 @@ int	main(int argc, char **argv, char **envp)
 	t_args_n *args_n =NULL;
 
 		
-		char	*line = ("ls | cr -l $USER $fddv v $");
+		char	*line = ("ls < l d << ssdd | cr \"-l\" $USER $fddv 'v\"' > gkg >> f $ $??");
 		if(line[0])
 		{
 			args_n =initialization_list(line,env);

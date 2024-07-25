@@ -3,6 +3,7 @@
 
 #include "min.h"
 
+int exx =5001;
 
 static char  * search_env(t_envp *env, char *str)
 {
@@ -13,7 +14,7 @@ static char  * search_env(t_envp *env, char *str)
 	while (env)
 	{
 		if (!ft_strncmp(env->env, str, len_str) && *(env->env + len_str) == '=')
-			return (env->env+len_str+1);
+			return (env->env + len_str + 1);
 		env = env->next;
 	}
 	return (NULL);
@@ -94,7 +95,14 @@ char *change_var(char * str,int *err)
         // printf("\nq=%c|\n",q);
        if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
         {
-            if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))
+            if(str[x+1]=='?')
+            {
+                char *ll =ft_itoa(exx);
+                i+=ft_strlen(ll);
+                x+=2;
+                free(ll);
+            }
+            else if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))
             {
                 // if((str[x+1]=='"' || str[x+1]=='\''))
                 //     x++;
@@ -169,7 +177,21 @@ char *change_var(char * str,int *err)
         // printf("\nq=%c|\n",q);
         if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
         {
-            if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))//|$ |
+            if(str[x+1]=='?')
+            {
+                // i+=ft_strlen(ft_itoa(exx));
+                char *sss= ft_itoa(exx);
+                int a =0;
+                while (sss[a])
+                {
+                    re[i++]=sss[a++];
+                }
+                free(sss);
+
+                
+                x+=2;
+            }
+            else if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))//|$ |
             {
                 // if((str[x+1]=='"' || str[x+1]=='\''))
                 //     x++;

@@ -96,7 +96,7 @@ t_args_n	*ft_lstnew_one(char **str);
 void	ft_lstiterr(t_args_n *lst);
 void	clear_list(t_args_n **lst);
 
-
+char	*whithout_q(char *str);
 
 int check_errors(char *str,int err);
 int chacke_q(char c,t_quote *q);
