@@ -13,10 +13,10 @@ int	main(int argc, char **argv, char **envp)
 	t_args_n *args_n =NULL;
 
 		
-		char	*line = ("ls < l d << ssdd | cr \"-l\" $USER $fddv 'v\"' > gkg >> f $ $??");
+		char	*line = readline("$ ");
 		if(line[0])
 		{
-			args_n =initialization_list(line,env);
+			args_n =initialization_list(line,envp);
 			// chake_error(args_n);
 			// str = ft_split_pip(line,'|');
 			// int  i =0;
@@ -32,7 +32,8 @@ int	main(int argc, char **argv, char **envp)
 			// printf("%s\n",user);
 			// printf("%s\n",args_n->next->flags[i]);
 		}
-		// free_to_pin(str);
+		free(line);
+		// free_to_pin(str);  
 
 
 

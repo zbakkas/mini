@@ -85,12 +85,12 @@ char *set_speece( char *str) ;
 // char *get_argumants(char *str);
 // char **get_flages(char *str);
 // char *get_cmd(char *str);
-char *change_var(char * str,int *err);
+char *change_var(char * str, char **envp, int *err);
 char **get_args(char **str);
 t_out *get_out(char **str);
 t_inp *get_inp(char **str);
 
-t_args_n *initialization_list(char *line,t_envp *env);
+t_args_n *initialization_list(char *line, char **envp);
 void	ft_lstadd_backk(t_args_n **lst, t_args_n *new);
 t_args_n	*ft_lstnew_one(char **str);
 void	ft_lstiterr(t_args_n *lst);
