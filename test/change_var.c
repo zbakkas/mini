@@ -13,309 +13,104 @@
 
 #include "min.h"
 
-int exx = 5001;
-
-static char	*search_in_env(char **envp, char *str)
+int exit_status =4334;
+static int	check_erroe_var(char *var, int j, int l, char *str)
 {
-	int	x;
-	int	l;
+	int	ll;
+	int	k;
 
-	x = 0;
-	l = ft_strlen(str);
-	while (envp[x])
+	ll = -1;
+	k = 0;
+	while (var && var[++ll] && !k)
+		if (var[ll] == ' ')
+			k = 1;
+	ll = j;
+	if (l != 2 && str[j])
 	{
-		if (ft_strnstr(envp[x], str, l) && envp[x][l] && envp[x][l] == '=')
+		while (ll >= 0)
 		{
-			return (ft_strnstr(envp[x], str, l) + l + 1);
-		}
-		x++;
-	}
-	return (NULL);
-}
-
-static int	get_name_var_count(char *str)
-{
-	char	*re;
-	int		x;
-	int		is_v;
-	int		i;
-
-	x = 0;
-	is_v = 0;
-	i = 0;
-	while (str[x])
-	{
-		if (is_v)
-		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"')
+			ll--;
+			if ((str[ll] == '>' || str[ll] == '<' ))
+			{
+				if ((!var || k))
+					return (1);
+			}
+			if (str[ll] != ' ')
 				break ;
-			i++;
 		}
-		if (str[x] == '$')
-			is_v = 1;
-		x++;
 	}
-	return (i);
+	return (0);
 }
 
-static char	*get_name_var(char *str, int *j)
-{
-	char	*re;
-	int		x;
-	int		is_v;
-	int		i;
-
-	x = 0;
-	is_v = 0;
-	i = 0;
-	re = malloc(get_name_var_count(str) + 1);
-	while (str[x])
-	{
-		if (is_v)
-		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"')
-				break ;
-			re[i++] = str[x];
-			(*j)++;
-		}
-		if (str[x] == '$')
-			is_v = 1;
-		x++;
-	}
-	re[i] = '\0';
-	return (re);
-}
-
-// $?
-int	change_var_count_one(int *x)
+//$? exit_status
+static void	change_var_one(int *x, char *re, int *i)
 {
 	char	*str;
-	int		i;
+	int		a;
 
-	str = ft_itoa(exx);
-	i = ft_strlen(str);
-	(*x)++;
+	str = ft_itoa(exit_status);
+	a = 0;
+	while (str[a])
+	{
+		re[(*i)++] = str[a++];
+	}
 	free(str);
-	return (i);
+	(*x)++;
 }
 
-int	change_var_count_tow(char **envp, int l, int *x, char *str)
+static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 {
 	int		j;
-	char	*var;
-	int		i;
 	char	*ss;
+	char	*var;
 
-	ss = get_name_var(str + *x, x);
+	j = args->x;
+	ss = get_name_var(str + args->x, &(*args).x);
 	var = search_in_env(envp, ss);
-	i = 0;
 	free(ss);
-	i += ft_strlen(var);
+	*err = check_erroe_var(var, j, args->l, str);
 	j = 0;
-	if (l != 2)
-		i++;
-	while (l != 2 && var && var[j])
+	if (var && var[j] && args->l != 2)
+		args->re[args->i++] = '"';
+	while (var && var[j])
 	{
-		if (j - 1 >= 0 && l != 2 && var[j - 1] == ' ' && var[j] != ' ')
-			i++;
-		if (l != 2 && var[j] != ' ' && (var[j + 1] == ' '
+		if (j - 1 >= 0 && args->l != 2 && var[j - 1] == ' ' && var[j] != ' ')
+			args->re[args->i++] = '"';
+		args->re[args->i++] = var[j];
+		if (args->l != 2 && var[j] != ' ' && (var[j + 1] == ' '
 				|| var[j + 1] == '\0'))
-			i++;
+			args->re[args->i++] = '"';
 		j++;
 	}
-	return (i);
 }
 
-int	change_var_count(char *str, char **envp, int *err)
+char *change_var(char *str, char **envp, int *err)
 {
-	int		x;
-	int		i;
-	int		l;
-	t_quote	q;
+	t_args_var	args;
+	t_quote		q;
 
 	q.inDoubleQuote = 0;
 	q.inSingleQuote = 0;
-	x = -1;
-	i = 0;
-	while (str[++x])
+	args.re = malloc (change_var_count(str, envp, err) + 1);
+	args.x = -1;
+	args.i = 0;
+	while (str[++args.x])
 	{
-		l = chacke_q(str[x], &q);
-		if (str[x] == '$' && l != 1 && str[x + 1]
-			&& str[x + 1] != ' ' && str[x + 1] != '$')
+		args.l = chacke_q(str[args.x], &q);
+		if (str[args.x] == '$' && args.l != 1 && str[args.x + 1]
+			&& str[args.x + 1] != ' ' && str[args.x + 1] != '$')
 		{
-			if (str[x + 1] == '?')
-				i = i + change_var_count_one(&x);
-			else if (!(str[x + 1] == ' ' || str[x + 1] == '\''
-					|| str[x + 1] == '"'))
-				i = i + change_var_count_tow(envp, l, &x, str);
+			if (str[args.x + 1] == '?')
+				change_var_one(&args.x, args.re, &args.i);
+			else if (!(str[args.x + 1] == ' ' || str[args.x + 1] == '\''
+					|| str[args.x + 1] == '"'))
+				change_var_tow(&args, str, err, envp);
 		}
 		else
-			i++;
+			args.re[args.i++] = str[args.x];
 	}
-	return (i);
-}
-
-char *change_var(char * str, char **envp, int *err)
-{
-	char *re;
-	int x;
-	int q;
-	int qq;
-	char * var= NULL;
-	int i;
-	int  j;
-
-	i = change_var_count(str,envp,err);
-	printf("d =%d\n",i);
-	re =malloc (i+1);
-	x =0;
-	i =0;
-	q=0;
-	qq=0;
-	 j =0;
-	while (str[x])
-	{
-		if (str[x] == '\'' ||  str[x] == '"') 
-		{
-			if(qq ==0)
-			{
-				q=str[x];
-				qq++;
-			}
-			else if (q==str[x])
-			{
-				qq=0;
-				q=0;            
-			}
-			
-			// sing_q= !sing_q;
-		}
-	// printf("%c",str[x]);
-		// printf("\nq=%c|\n",q);
-		if(str[x]=='$'&& q!='\'' && str[x+1]&& str[x+1]!=' ' && str[x+1]!='$')
-		{
-			if(str[x+1]=='?')
-			{
-				// i+=ft_strlen(ft_itoa(exx));
-				char *sss= ft_itoa(exx);
-				int a =0;
-				while (sss[a])
-				{
-					re[i++]=sss[a++];
-				}
-				free(sss);
-
-				
-				x++;
-			}
-			else if(str[x+1]&& (str[x+1]==' ' ||  str[x+1]=='\''|| str[x+1]=='"'))//|$ |
-			{
-				// if((str[x+1]=='"' || str[x+1]=='\''))
-				//     x++;
-			}
-			else   
-			{
-
-
-
-
-
-				j =x;
-				// printf("v=%s\n",(get_name_var(str+x)));
-				char *ss= get_name_var(str+x,&x);
-			   var = search_in_env(envp,ss);
-				// var = getenv(ss);
-				free(ss);
-
-
-				/////error
-
-				int l =0;
-				int k =0;
-				while (var &&var[l])
-				{
-					if(var[l]==' ')
-					{
-						k =1;
-						break;
-					}
-					l++;
-				}
-				l =j;
-				if (q!='"'&&  str[x])
-				{
-					while (l>=0)
-					{
-						
-						l--;
-						//  printf("%c\n",str[l]);   
-						if((str[l]=='>'||str[l]=='<' ))
-						{
-							if((!var || k))
-								*err = 1;
-						}
-
-						if(str[l]!=' ')
-							break;
-						
-
-
-						
-					}
-					
-					
-
-					
-					
-				}
-				
-
-
-				//////////
-				// var = search_env(env,get_name_var(str+x,&x));
-				j =0;
-				if( var && var[j] && q!='"')
-					re[i++]='"';
-				while (var && var[j])
-				{
-					if(j-1>=0&&q!='"' && var[j-1]==' ' &&var[j]!=' ')
-						re[i++]='"';
-					// if(j-1>=0&&q!='"' && var[j-1]!=' ' &&var[j]==' ')
-					//     re[i++]='"';
-					re[i++]=var[j];
-					if(q!='"' && var[j]!=' ' &&(var[j+1]==' '|| var[j+1]=='\0'))
-						re[i++]='"';
-					j++;
-				}
-
-				// string   |
-				// string|
-				// if(q!='"')
-				//     re[i++]='"';
-				
-			
-				
-			}
-		
-		
-		}
-		else    
-		{
-			re[i++]= str[x];
-		}
-		x++;
-		
-	}
-	re[i]='\0';
-	return re;
+	args.re[args.i] = '\0';
+	return (args.re);
 }
 
 
-// int main()
-// {
-//     t_envp *env=NULL;
-//     char *str  = "ll $$ $ARG dd";
-//     char *ss= "ll $$ \"echo\" \"|\" \"ls'\" '-l\"    \">\"    \"'\"  \"cat\"   dd";
-//     printf("%s\n",str);
-//     printf("%s\n",change_var(str));
-// }

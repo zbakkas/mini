@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MIN_H
+#define MIN_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,6 +20,13 @@
 #include <readline/readline.h>
 #include "libft/libft.h"
 #include <stdbool.h>
+
+// #ifndef EXIT_STATUS
+// #define EXIT_STATUS
+
+// extern int	exit_status;
+
+// #endif
 
 
 # define TOKENS_ERROR ": syntax error near unexpected token"
@@ -43,35 +53,42 @@ typedef struct s_envp
 
 typedef struct  s_quote
 {
-    int inDoubleQuote ;
-    int inSingleQuote ;
+	int inDoubleQuote ;
+	int inSingleQuote ;
 
 }t_quote;
 
 
 typedef struct s_inp
 {
-    char *inp;
-    bool is_h;
+	char *inp;
+	bool is_h;
 
 } t_inp;
 
 typedef struct s_out
 {
-    char *out;
-    bool is_a;
+	char *out;
+	bool is_a;
 
 } t_out;
-
-
+///////change_var////
+typedef struct s_args_var
+{
+	int		x;
+	int		l;
+	char	*re;
+	int		i;
+}	t_args_var;
+/////////////////////
 
 typedef struct s_args_n
 {
-    char **arguments;
-    t_inp *inp;
-    t_out *out;
-    struct s_args_n *next;
-    
+	char **arguments;
+	t_inp *inp;
+	t_out *out;
+	struct s_args_n *next;
+	
 } t_args_n;
 
 
@@ -86,6 +103,11 @@ char *set_speece( char *str) ;
 // char **get_flages(char *str);
 // char *get_cmd(char *str);
 char *change_var(char * str, char **envp, int *err);
+int	change_var_count(char *str, char **envp, int *err);
+char	*get_name_var(char *str, int *j);
+char	*search_in_env(char **envp, char *str);
+
+
 char **get_args(char **str);
 t_out *get_out(char **str);
 t_inp *get_inp(char **str);
@@ -100,3 +122,5 @@ char	*whithout_q(char *str);
 
 int check_errors(char *str,int err);
 int chacke_q(char c,t_quote *q);
+
+#endif

@@ -5,7 +5,7 @@ NAME = mini
 F = -fsanitize=address -g
 
 
-SRC =  test.c get_args2.c set_list.c split_args.c split_pip.c   clear_list.c get_env_realine.c print_list.c change_var.c check_errors.c set_speace_line.c get_inp.c get_out.c
+SRC =  test.c get_args2.c set_list.c split_args.c split_pip.c   clear_list.c get_env_realine.c print_list.c change_var.c check_errors.c set_speace_line.c get_inp.c get_out.c change_var_one.c change_var_ulit.c
 
 
 
