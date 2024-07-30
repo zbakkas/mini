@@ -13,7 +13,7 @@
 
 #include "min.h"
 
-int exit_status =4334;
+
 static int	check_erroe_var(char *var, int j, int l, char *str)
 {
 	int	ll;

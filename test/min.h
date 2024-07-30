@@ -24,7 +24,7 @@
 // #ifndef EXIT_STATUS
 // #define EXIT_STATUS
 
-// extern int	exit_status;
+extern int	exit_status;
 
 // #endif
 

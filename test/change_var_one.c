@@ -12,8 +12,6 @@
 
 #include "min.h"
 
-int exit_status =4334;
-
 // $? exit_status
 static int	change_var_count_one(int *x)
 {

@@ -12,6 +12,21 @@
 
 #include "min.h"
 
+static void	free_double_str(char **str)
+{
+	int	x;
+
+	x = 0;
+	if (!str)
+		return ;
+	while (str[x])
+	{
+		free(str[x++]);
+	}
+	free(str);
+	str = (NULL);
+}
+
 t_args_n	*ft_lstnew_one(char **str)
 {
 	t_args_n	*new_node;

@@ -1,7 +1,7 @@
 
 #include "min.h"
 
-
+int exit_status =11;
 
 
 
