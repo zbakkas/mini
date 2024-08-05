@@ -44,7 +44,7 @@ static int	get_name_var_count(char *str)
 	{
 		if (is_v)
 		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"')
+			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"' || str[x] == '$')
 				break ;
 			i++;
 		}
@@ -70,7 +70,7 @@ char	*get_name_var(char *str, int *j)
 	{
 		if (is_v)
 		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"')
+			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"' || str[x] == '$')
 				break ;
 			re[i++] = str[x];
 			(*j)++;

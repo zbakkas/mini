@@ -29,7 +29,7 @@ extern int	exit_status;
 // #endif
 
 
-# define TOKENS_ERROR ": syntax error near unexpected token"
+# define TOKENS_ERROR " : syntax error near unexpected token"
 # define NEW_LINE_ERROR ": syntax error near unexpected token `newline'"
 // # define HEREDOC_ERROR "minishell: syntax error near unexpected token `<<'"
 // # define APPEND_ERROR "minishell: syntax error near unexpected token `>>'"

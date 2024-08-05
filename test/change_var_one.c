@@ -33,6 +33,7 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 	char	*ss;
 
 	ss = get_name_var(str + *x, x);
+	printf("%s\n",ss);
 	var = search_in_env(envp, ss);
 	i = 0;
 	free(ss);
