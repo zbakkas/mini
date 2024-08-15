@@ -1,5 +1,5 @@
 CC =cc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS =  
 RM = rm -f
 NAME = mini
 F = -fsanitize=address -g
@@ -13,8 +13,8 @@ OBJ = $(SRC:.c=.o)
 
 all:$(NAME)
 
-$(NAME):$(OBJ)
-	$(CC) $(CFLAGS)  $(OBJ) libft/libft.a -lreadline $(F) -o $(NAME) 
+$(NAME):$(SRC)
+	$(CC) $(CFLAGS)  $(SRC) libft/libft.a -lreadline -L/goinfre/zbakkas/homebrew/opt/readline/lib -I/goinfre/zbakkas/homebrew/opt/readline/include -o $(NAME) 
 
 
 

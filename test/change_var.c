@@ -1,18 +1,16 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   change_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
+/*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-07-28 15:45:21 by zbakkas          ###   ########.fr       */
+/*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
+/*   Updated: 2024/08/15 19:07:18 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
-
 
 static int	check_erroe_var(char *var, int j, int l, char *str)
 {
@@ -84,7 +82,29 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 	}
 }
 
-char *change_var(char *str, char **envp, int *err)
+// cat << $USER 
+static int	check_and_her_var(char *str, int x, t_args_var args)
+{
+	int	l;
+
+	l = 0;
+	while (x >= 0)
+	{
+		while (x >= 0 && (str[x] == ' '))
+		{
+			x--;
+		}
+		if (str[x] == '<' && x - 1 >= 0 && str[x - 1] == '<')
+			l = 1;
+		x--;
+	}
+	if (!l && str[args.x] == '$' && args.l != 1 && str[args.x + 1]
+		&& str[args.x + 1] != ' ' && str[args.x + 1] != '$')
+		return (1);
+	return (0);
+}
+
+char	*change_var(char *str, char **envp, int *err)
 {
 	t_args_var	args;
 	t_quote		q;
@@ -97,8 +117,7 @@ char *change_var(char *str, char **envp, int *err)
 	while (str[++args.x])
 	{
 		args.l = chacke_q(str[args.x], &q);
-		if (str[args.x] == '$' && args.l != 1 && str[args.x + 1]
-			&& str[args.x + 1] != ' ' && str[args.x + 1] != '$')
+		if (check_and_her_var(str, args.x, args))
 		{
 			if (str[args.x + 1] == '?')
 				change_var_one(&args.x, args.re, &args.i);
@@ -112,5 +131,3 @@ char *change_var(char *str, char **envp, int *err)
 	args.re[args.i] = '\0';
 	return (args.re);
 }
-
-

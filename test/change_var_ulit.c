@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_var_ulit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
+/*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-07-29 20:23:37 by zbakkas          ###   ########.fr       */
+/*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
+/*   Updated: 2024/08/15 19:48:50 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static int	get_name_var_count(char *str)
 	{
 		if (is_v)
 		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"' || str[x] == '$')
+			if (str[x] == '\n' || str[x] == ' ' || str[x] == '\''
+				|| str[x] == '"' || str[x] == '$')
 				break ;
 			i++;
 		}
@@ -70,7 +71,8 @@ char	*get_name_var(char *str, int *j)
 	{
 		if (is_v)
 		{
-			if (str[x] == ' ' || str[x] == '\'' || str[x] == '"' || str[x] == '$')
+			if (str[x] == '\n' || str[x] == ' ' || str[x] == '\'' 
+				|| str[x] == '"' || str[x] == '$')
 				break ;
 			re[i++] = str[x];
 			(*j)++;

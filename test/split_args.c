@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
+/*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-24 15:52:14 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-07-24 15:52:14 by zbakkas          ###   ########.fr       */
+/*   Created: 2024/07/24 15:52:14 by zbakkas           #+#    #+#             */
+/*   Updated: 2024/08/15 19:46:15 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	int	c_word(char *s, char c)
 		return (0);
 	if (s[x] && c == '\0')
 		return (1);
-	while (s[x] == c)
+	while (s[x] == c || s[x] == c)
 		x++;
 	if (s[x] == '\0')
 		return (0);
