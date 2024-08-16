@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 11:50:50 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 16:59:59 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_erroe_var(char *var, int j, int l, char *str)
 	ll = j;
 	if (l != 2 && str[j])
 	{
-		while (ll >= 0)
+		while (ll > 0)
 		{
 			ll--;
 			if ((str[ll] == '>' || str[ll] == '<' ))

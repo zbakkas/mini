@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 09:26:15 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 13:28:49 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ typedef struct s_inp
 	char *inp;
 	bool is_h;
 
+	
+
 } t_inp;
 
 typedef struct s_out
 {
 	char *out;
 	bool is_a;
+
 
 } t_out;
 ///////change_var////
