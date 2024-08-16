@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 11:57:54 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:46:39 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	get_name_var_count(char *str)
 		if (is_v)
 		{
 			if (str[x] == '\n' || is_sp(str[x]) || str[x] == '\''
-				|| str[x] == '"' || str[x] == '$')
+				|| str[x] == '"' || str[x] == '$' )
 				break ;
 			i++;
 		}
@@ -71,16 +71,16 @@ char	*get_name_var(char *str, int *j)
 	{
 		if (is_v)
 		{
-			if (str[x] == '\n' || is_sp(str[x]) || str[x] == '\'' 
-				|| str[x] == '"' || str[x] == '$')
+			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_')
 				break ;
 			re[i++] = str[x];
 			(*j)++;
+			if (ft_isdigit(str[x]) && str[x - 1] == '$')
+				break ;
 		}
 		if (str[x] == '$')
 			is_v = 1;
 		x++;
 	}
-	re[i] = '\0';
-	return (re);
+	return (re[i] = '\0', (re));
 }
