@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 19:46:39 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 21:29:58 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ static int	get_name_var_count(char *str)
 	{
 		if (is_v)
 		{
-			if (str[x] == '\n' || is_sp(str[x]) || str[x] == '\''
-				|| str[x] == '"' || str[x] == '$' )
+			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_' && str[x-1]!= '$')
 				break ;
 			i++;
 		}
@@ -66,21 +65,22 @@ char	*get_name_var(char *str, int *j)
 	x = 0;
 	is_v = 0;
 	i = 0;
+	printf("count%d\n",get_name_var_count(str));
 	re = malloc(get_name_var_count(str) + 1);
 	while (str[x])
 	{
 		if (is_v)
 		{
-			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_')
+			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_' && str[x-1]!= '$')
 				break ;
 			re[i++] = str[x];
 			(*j)++;
-			if (ft_isdigit(str[x]) && str[x - 1] == '$')
-				break ;
 		}
 		if (str[x] == '$')
 			is_v = 1;
 		x++;
 	}
-	return (re[i] = '\0', (re));
+	re[i] = '\0';
+	printf("name;%s\n",re);
+	return ( (re));
 }
