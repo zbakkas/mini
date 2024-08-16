@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_var_one.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
+/*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-07-29 20:27:17 by zbakkas          ###   ########.fr       */
+/*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
+/*   Updated: 2024/08/16 11:46:49 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 		i++;
 	while (l != 2 && var && var[j])
 	{
-		if (j - 1 >= 0 && l != 2 && var[j - 1] == ' ' && var[j] != ' ')
+		if (j - 1 >= 0 && l != 2 && is_sp(var[j - 1]) && !is_sp(var[j]))
 			i++;
-		if (l != 2 && var[j] != ' ' && (var[j + 1] == ' '
+		if (l != 2 && is_sp(var[j]) && (is_sp(var[j + 1])
 				|| var[j + 1] == '\0'))
 			i++;
 		j++;
@@ -68,11 +68,11 @@ int	change_var_count(char *str, char **envp, int *err)
 	{
 		l = chacke_q(str[x], &q);
 		if (str[x] == '$' && l != 1 && str[x + 1]
-			&& str[x + 1] != ' ' && str[x + 1] != '$')
+			&& !is_sp(str[x + 1]) && str[x + 1] != '$')
 		{
 			if (str[x + 1] == '?')
 				i = i + change_var_count_one(&x);
-			else if (!(str[x + 1] == ' ' || str[x + 1] == '\''
+			else if (!(is_sp(str[x + 1]) || str[x + 1] == '\''
 					|| str[x + 1] == '"'))
 				i = i + change_var_count_tow(envp, l, &x, str);
 		}

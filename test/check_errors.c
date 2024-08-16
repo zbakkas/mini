@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zbakkas <zouhirbakkas@gmail.com>           #+#  +:+       +#+        */
+/*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-26 21:08:16 by zbakkas           #+#    #+#             */
-/*   Updated: 2024-07-26 21:08:16 by zbakkas          ###   ########.fr       */
+/*   Created: 2024/07/26 21:08:16 by zbakkas           #+#    #+#             */
+/*   Updated: 2024/08/16 11:51:38 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_errors_p(char *str, int l, int *x)
 		(*x)++;
 		if (str[(*x)] == str[(*x) - 1])
 			(*x)++;
-		while (str[(*x)] && str[(*x)] == ' ')
+		while (str[(*x)] && is_sp(str[(*x)]))
 			(*x)++;
 		if (!str[(*x)])
 			return (exit_status=2, printf("%s\n", NEW_LINE_ERROR), 1);

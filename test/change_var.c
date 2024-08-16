@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/15 19:07:18 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 11:50:50 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_erroe_var(char *var, int j, int l, char *str)
 	ll = -1;
 	k = 0;
 	while (var && var[++ll] && !k)
-		if (var[ll] == ' ')
+		if (is_sp(var[ll]))
 			k = 1;
 	ll = j;
 	if (l != 2 && str[j])
@@ -30,10 +30,10 @@ static int	check_erroe_var(char *var, int j, int l, char *str)
 			ll--;
 			if ((str[ll] == '>' || str[ll] == '<' ))
 			{
-				if ((!var || k))
+				if ((!var || !var[0] || k))
 					return (1);
 			}
-			if (str[ll] != ' ')
+			if (!is_sp(str[ll]))
 				break ;
 		}
 	}
@@ -72,10 +72,10 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 		args->re[args->i++] = '"';
 	while (var && var[j])
 	{
-		if (j - 1 >= 0 && args->l != 2 && var[j - 1] == ' ' && var[j] != ' ')
+		if (j - 1 >= 0 && args->l != 2 && is_sp(var[j - 1]) && !is_sp(var[j]))
 			args->re[args->i++] = '"';
 		args->re[args->i++] = var[j];
-		if (args->l != 2 && var[j] != ' ' && (var[j + 1] == ' '
+		if (args->l != 2 && !is_sp(var[j]) && (is_sp(var[j + 1])
 				|| var[j + 1] == '\0'))
 			args->re[args->i++] = '"';
 		j++;
@@ -90,7 +90,7 @@ static int	check_and_her_var(char *str, int x, t_args_var args)
 	l = 0;
 	while (x >= 0)
 	{
-		while (x >= 0 && (str[x] == ' '))
+		while (x >= 0 && (is_sp(str[x])))
 		{
 			x--;
 		}
@@ -99,7 +99,7 @@ static int	check_and_her_var(char *str, int x, t_args_var args)
 		x--;
 	}
 	if (!l && str[args.x] == '$' && args.l != 1 && str[args.x + 1]
-		&& str[args.x + 1] != ' ' && str[args.x + 1] != '$')
+		&& !is_sp(str[args.x + 1]) && str[args.x + 1] != '$')
 		return (1);
 	return (0);
 }
@@ -121,7 +121,7 @@ char	*change_var(char *str, char **envp, int *err)
 		{
 			if (str[args.x + 1] == '?')
 				change_var_one(&args.x, args.re, &args.i);
-			else if (!(str[args.x + 1] == ' ' || str[args.x + 1] == '\''
+			else if (!(is_sp(str[args.x + 1]) || str[args.x + 1] == '\''
 					|| str[args.x + 1] == '"'))
 				change_var_tow(&args, str, err, envp);
 		}

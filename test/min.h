@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/15 14:13:33 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/16 09:26:15 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,7 @@ char	*whithout_q(char *str);
 
 int check_errors(char *str,int err);
 int chacke_q(char c,t_quote *q);
+int	is_sp(char c);
+
 
 #endif
