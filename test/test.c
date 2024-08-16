@@ -4,7 +4,7 @@
 // #include <sys/wait.h>
 
 
-int exit_status =11;
+int exit_status =115;
 
 void signal_handler(int signal)
 {
