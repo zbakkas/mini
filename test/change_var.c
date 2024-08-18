@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 15:30:02 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 17:12:01 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 	}
 }
 
-// cat << $USER 
+// cat << $USER stoop in $USER not value of $USER
 static int	check_and_her_var(char *str, int x, t_args_var args)
 {
 	int	l;
@@ -94,7 +94,7 @@ static int	check_and_her_var(char *str, int x, t_args_var args)
 		{
 			x--;
 		}
-		if (str[x] == '<' && x - 1 >= 0 && str[x - 1] == '<')
+		if (x >= 0 && str[x] == '<' && x - 1 >= 0 && str[x - 1] == '<')
 			l = 1;
 		x--;
 	}
