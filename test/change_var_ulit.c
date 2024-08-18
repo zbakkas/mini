@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 14:32:58 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 17:30:02 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*search_in_env(char **envp, char *str)
 
 static int	get_name_var_count(char *str)
 {
-	char	*re;
 	int		x;
 	int		is_v;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 15:30:02 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 17:28:16 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	change_var_count_one(int *x)
 	return (i);
 }
 
-static int	change_var_count_tow(char **envp, int l, int *x, char *str)
+static int	change_var_count_tow(char **envp, int *x, char *str)
 {
 	int		j;
 	char	*var;
@@ -38,21 +38,10 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 	free(ss);
 	i += ft_strlen(var);
 	j = 0;
-	// if (l != 2)
-	// 	i++;
-	// while (l != 2 && var && var[j])
-	// {
-	// 	if (j - 1 >= 0 && l != 2 && is_sp(var[j - 1]) && !is_sp(var[j]))
-	// 		i++;
-	// 	if (l != 2 && is_sp(var[j]) && (is_sp(var[j + 1])
-	// 			|| var[j + 1] == '\0'))
-	// 		i++;
-	// 	j++;
-	// }
 	return (i);
 }
 
-int	change_var_count(char *str, char **envp, int *err)
+int	change_var_count(char *str, char **envp)
 {
 	int		x;
 	int		i;
@@ -73,7 +62,7 @@ int	change_var_count(char *str, char **envp, int *err)
 				i = i + change_var_count_one(&x);
 			else if (!(is_sp(str[x + 1]) || str[x + 1] == '\''
 					|| str[x + 1] == '"'))
-				i = i + (change_var_count_tow(envp, l, &x, str) + 2);
+				i = i + (change_var_count_tow(envp, &x, str) + 2);
 		}
 		else
 			i++;

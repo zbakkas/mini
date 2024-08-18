@@ -1,5 +1,5 @@
 CC =cc
-CFLAGS =  
+CFLAGS =#  -Wall -Wextra -Werror
 RM = rm -f
 NAME = mini
 F =-g -fsanitize=address 

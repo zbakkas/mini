@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 15:59:18 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 17:28:52 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char *set_speece( char *str) ;
 // char **get_flages(char *str);
 // char *get_cmd(char *str);
 char *change_var(char * str, char **envp, int *err);
-int	change_var_count(char *str, char **envp, int *err);
+int	change_var_count(char *str, char **envp);
 char	*get_name_var(char *str, int *j);
 char	*search_in_env(char **envp, char *str);
 

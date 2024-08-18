@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 17:12:01 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 17:29:40 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*change_var(char *str, char **envp, int *err)
 
 	q.inDoubleQuote = 0;
 	q.inSingleQuote = 0;
-	args.re = malloc (change_var_count(str, envp, err) + 1);
+	args.re = malloc (change_var_count(str, envp) + 1);
 	args.x = -1;
 	args.i = 0;
 	while (str[++args.x])
