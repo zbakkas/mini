@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 11:48:24 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 14:32:58 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ static int	get_name_var_count(char *str)
 	{
 		if (is_v)
 		{
-			if ((!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_' && str[x-1]!='$')|| (!ft_isalpha(str[x-1]) && str[x-1]!='$'))
+			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_' && str[x - 1] != '$')
 				break ;
 			i++;
+			if (!ft_isalpha(str[x]) && str[x - 1] == '$')
+				break ;
 		}
 		if (str[x] == '$')
 			is_v = 1;
@@ -70,12 +72,12 @@ char	*get_name_var(char *str, int *j)
 	{
 		if (is_v)
 		{
-			if ((!ft_isalpha(str[x]) && !ft_isdigit(str[x]) 
-					&& str[x] != '_' && str[x - 1] != '$') 
-				|| (!ft_isalpha(str[x - 1]) && str[x - 1] != '$'))
+			if (!ft_isalpha(str[x]) && !ft_isdigit(str[x]) && str[x] != '_' && str[x - 1] != '$')
 				break ;
 			re[i++] = str[x];
 			(*j)++;
+			if (!ft_isalpha(str[x]) && str[x - 1] == '$')
+				break ;
 		}
 		if (str[x] == '$')
 			is_v = 1;

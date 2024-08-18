@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 18:44:22 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 15:59:18 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@
 #include "libft/libft.h"
 #include <stdbool.h>
 
-// #ifndef EXIT_STATUS
-// #define EXIT_STATUS
+// #ifndef g_exit_status
+// #define g_exit_status
 
-extern int	exit_status;
+extern int	g_exit_status;
 
 // #endif
 
 
 # define TOKENS_ERROR "minishell: syntax error near unexpected token"
-# define NEW_LINE_ERROR "minishell: syntax error near unexpected token `newline'"
+# define NEW_LINE_ERROR "minishell: syntax error near unexpected token `newline'\n"
 // # define HEREDOC_ERROR "minishell: syntax error near unexpected token `<<'"
 // # define APPEND_ERROR "minishell: syntax error near unexpected token `>>'"
 // # define IN_ERROR "minishell: syntax error near unexpected token `<'"
 // # define OUT_ERROR "minishell: syntax error near unexpected token `>'"
 
 # define QUOTES_ERROR "minishell: unexpected EOF while looking for matching"
-# define AMBIGUOUS_ERROR "minishell: ambiguous redirect"
+# define AMBIGUOUS_ERROR "minishell: ambiguous redirect\n"
 // # define SPACE_REDIRECTION_ERROR ": No such file or directory"
 
 

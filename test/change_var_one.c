@@ -6,19 +6,19 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 17:43:57 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/18 15:30:02 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
 
-// $? exit_status
+// $? g_exit_status
 static int	change_var_count_one(int *x)
 {
 	char	*str;
 	int		i;
 
-	str = ft_itoa(exit_status);
+	str = ft_itoa(g_exit_status);
 	i = ft_strlen(str);
 	(*x)++;
 	free(str);

@@ -4,7 +4,7 @@
 // #include <sys/wait.h>
 
 
-int exit_status =115;
+int g_exit_status =115;
 
 void signal_handler(int signal)
 {
@@ -13,7 +13,7 @@ void signal_handler(int signal)
         rl_on_new_line();
         // rl_replace_line("", 0);
         rl_redisplay();
-		/// exit_status 130;
+		/// g_exit_status 130;
     }
 }
 
