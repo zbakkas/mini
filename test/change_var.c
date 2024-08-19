@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 17:29:40 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/19 19:49:47 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 	ss = get_name_var(str + args->x, &(*args).x);
 	var = search_in_env(envp, ss);
 	free(ss);
-	*err = check_erroe_var(var, j, args->l, str);
+	if (!(*err))
+		*err = check_erroe_var(var, j, args->l, str);
 	j = 0;
 	if (var && var[j] && args->l != 2)
 		args->re[args->i++] = '"';
