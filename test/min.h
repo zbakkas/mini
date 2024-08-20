@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 17:28:52 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/20 14:29:38 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_args_var
 	int		l;
 	char	*re;
 	int		i;
+	int c_var;
 }	t_args_var;
 /////////////////////
 

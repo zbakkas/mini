@@ -6,33 +6,60 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/19 19:49:47 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/20 14:47:26 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
+int check_afte(char *str, int x, int c)
+{
+	int i =0;
+	
+	while (x >=0)
+	{
+		if(is_sp(str[x]))
+			break;
+		if(str[x]=='$')
+			i++;
+			x--;
+	}
+	
+	if(i == c &&  str[x+1] !='"'&&  str[x+1] !='\'')
+		return (1);
+	return (0);
+}
 
-static int	check_erroe_var(char *var, int j, int l, char *str)
+static int	check_erroe_var(char *var, int j, t_args_var *args, char *str)
 {
 	int	ll;
 	int	k;
+	int c;
 
-	ll = -1;
+	c = 0;
+	ll = - 1;
 	k = 0;
 	while (var && var[++ll] && !k)
 		if (is_sp(var[ll]))
 			k = 1;
 	ll = j;
-	if (l != 2 && str[j])
+	if (args->l != 2 && str[j])
 	{
 		while (ll > 0)
 		{
 			ll--;
 			if ((str[ll] == '>' || str[ll] == '<' ))
 			{
-				if ((!var || !var[0] || k))
+				printf("var=%s,>=%c,<=%c|\n",var,str[args->x + 1],str[j-1]);
+				
+				if(str[args->x + 1]=='$')
+					args->c_var++;
+				
+				printf("d=%d\n",args->c_var);
+				if ((!var || !var[0] || k) && (is_sp(str[args->x + 1]) || !str[args->x + 1])&& (is_sp(str[j-1]) || check_afte(str,j-1, args->c_var)))
 					return (1);
 			}
+			while ((ll>0 &&!is_sp(str[ll]) &&str[ll] != '>' && str[ll] != '<'))
+				ll--;
 			if (!is_sp(str[ll]))
 				break ;
 		}
@@ -64,10 +91,12 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 
 	j = args->x;
 	ss = get_name_var(str + args->x, &(*args).x);
+	// printf("j=%d,x=%d,j+len=%d\n",j,(*args).x,j+ (ft_strlen(ss)));
 	var = search_in_env(envp, ss);
+	// if (!(*err))
+	
+	*err = check_erroe_var(var, j, args, str);
 	free(ss);
-	if (!(*err))
-		*err = check_erroe_var(var, j, args->l, str);
 	j = 0;
 	if (var && var[j] && args->l != 2)
 		args->re[args->i++] = '"';
@@ -115,6 +144,7 @@ char	*change_var(char *str, char **envp, int *err)
 	args.re = malloc (change_var_count(str, envp) + 1);
 	args.x = -1;
 	args.i = 0;
+	args.c_var = 0;
 	while (str[++args.x])
 	{
 		args.l = chacke_q(str[args.x], &q);

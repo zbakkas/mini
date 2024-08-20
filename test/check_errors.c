@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 21:08:16 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/18 18:12:13 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/20 10:39:17 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_errors_p(char *str, int l, int *x, int first_p)
 		|| (!l && !str[(*x) + 1] && str[(*x)] == '|' ) 
 		|| (!l && str[(*x)] == '|' && (first_p) == *x))
 		return (g_exit_status = 258, print_err(TOKENS_ERROR, str[(*x)++]), 1);
-	else if (!l && (str[(*x)] == '<' || str[(*x)] == '>' || str[(*x)] == '|'))
+	else if (!l && (str[(*x)] == '<' || str[(*x)] == '>' ))
 	{
 		(*x)++;
 		if (str[(*x)] == str[(*x) - 1])
