@@ -6,11 +6,34 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 13:15:36 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 15:20:12 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
+
+int check_speace_in_var(char *var)
+{
+	int ll =0;
+	int s =0;
+	while (var && is_sp(var[ll]))
+		ll++;
+	while (var && var[ll])
+	{
+
+		if(var[ll] && s)
+			return (1);
+		
+		ll++;
+		while (var[ll] && is_sp(var[ll]))
+		{
+			ll++;
+			s=1;
+		}
+	}
+	return 0;
+}
+
 //$hhbhb@fh$USER
 int check_ambiguous(char *str,  char **envp, int err)
 {
@@ -19,25 +42,22 @@ int check_ambiguous(char *str,  char **envp, int err)
 	if(err )
 		return (1);
 	int x =0;
-	t_quote		q;
 	int l;
 	char *re =NULL;
 	char add[2];
-
-
-	q.inDoubleQuote = 0;
-	q.inSingleQuote = 0;
+	char *var;
+	char *ss;
+	
 	while (str[x])
 	{	
-		l = chacke_q(str[x], &q);
 		if(str[x]=='$')
 		{
-			char *ss = get_name_var(str + x, &x);
-			char *var = search_in_env(envp, ss);
-			int ll =0;
-			while (var && var[ll])
-				if (is_sp(var[ll++]))
-					return (free(ss), 1);
+			ss = get_name_var(str + x, &x);
+			var = search_in_env(envp, ss);
+
+				if(check_speace_in_var(var))
+					return(free(ss),1);
+			
 			// printf("var=%s|\n",var);
 			if(var)
 				re = ft_strjoin(re,var);
