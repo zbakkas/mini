@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 16:18:14 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:22:31 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int is_her(char *str,int x)
 {
 	if(str[x]=='<'&& str[x+1]=='<')
 		return 1;
-	if(str[x]=='<'&& str[x-1]=='<')
+	if(x-1>=0 && str[x]=='<'&& str[x-1]=='<')
 		return 1;
 	
 	return 0;
