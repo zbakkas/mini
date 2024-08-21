@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 16:38:41 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:16:15 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int check_ambiguous(char *str,  char **envp, int err)
 {
 	if(!str )
 		return (0);
-	if(err )
+	if(err)
 		return (1);
 	int x =0;
 	int l;
@@ -65,7 +65,7 @@ int check_ambiguous(char *str,  char **envp, int err)
 			var = search_in_env(envp, ss);
 
 				if(check_speace_in_var(var))
-					return(free(ss),1);
+					return(free(ss),free(str),1);
 			
 			// printf("var=%s|\n",var);
 			if(var)
@@ -84,8 +84,8 @@ int check_ambiguous(char *str,  char **envp, int err)
 	
 	// printf("last=%s|\n",re);
 	if(!re)
-		return 1;
-	return (0);
+		return (free(str),free(re),1);
+	return (free(str),free(re),0);
 }
 
 static char *check_erroe_var(char *str, int x )

@@ -17,6 +17,10 @@ void signal_handler(int signal)
     }
 }
 
+void ll()
+{
+	system("leaks mini");
+}
 
 int	main(int argc, char **argv, char **envp)
 {    
@@ -24,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	t_envp		*env=NULL;///hod
 	// t_args args;
 	t_args_n *args_n =NULL;
-
+	atexit(ll);
 
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
