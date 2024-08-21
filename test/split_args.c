@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:52:14 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/16 12:05:36 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 20:36:56 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 //1=>'  2=>"
 int	chacke_q(char c, t_quote *q)
 {
-	if (c == '"' && !q->inSingleQuote)
-		q->inDoubleQuote = !q->inDoubleQuote;
-	else if (c == '\'' && !q->inDoubleQuote)
-		q->inSingleQuote = !q->inSingleQuote;
-	if (!q->inDoubleQuote && !q->inSingleQuote)
+	if (c == '"' && !q->in_single_quote)
+		q->in_double_quote = !q->in_double_quote;
+	else if (c == '\'' && !q->in_double_quote)
+		q->in_single_quote = !q->in_single_quote;
+	if (!q->in_double_quote && !q->in_single_quote)
 		return (0);
-	else if (!q->inDoubleQuote && q->inSingleQuote)
+	else if (!q->in_double_quote && q->in_single_quote)
 		return (1);
-	else if (q->inDoubleQuote && !q->inSingleQuote)
+	else if (q->in_double_quote && !q->in_single_quote)
 		return (2);
 	else
 		return (3);
@@ -35,8 +35,8 @@ static	int	c_word(char *s)
 	int		re;
 	t_quote	q;
 
-	q.inDoubleQuote = 0;
-	q.inSingleQuote = 0;
+	q.in_double_quote = 0;
+	q.in_single_quote = 0;
 	x = 0;
 	re = 0;
 	if (!s[x])
@@ -47,7 +47,7 @@ static	int	c_word(char *s)
 		return (0);
 	while (s[x])
 	{
-		if (!chacke_q(s[x], &q) &&  is_sp(s[x]) && !is_sp(s[x + 1])
+		if (!chacke_q(s[x], &q) && is_sp(s[x]) && !is_sp(s[x + 1])
 			&& x < ft_strlen(s) - 1)
 			re++;
 		x++;
@@ -62,8 +62,8 @@ static char	*word(char *s, int *x)
 	int		j;
 	t_quote	q;
 
-	q.inDoubleQuote = 0;
-	q.inSingleQuote = 0;
+	q.in_double_quote = 0;
+	q.in_single_quote = 0;
 	i = 0;
 	while (is_sp(s[*x]))
 		(*x)++;
