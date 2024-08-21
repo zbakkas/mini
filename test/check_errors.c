@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 21:08:16 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/20 10:39:17 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:53:38 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,19 @@ static void	print_err(char *str, char c)
 	ft_putchar_fd('\n', 2);
 }
 
+static int check_p_finel(char *str,int x)
+{
+	while (is_sp(str[x]))
+		x++;
+	if(!str[x])
+		return (1);
+	return (0);
+}
+
 int	check_errors_p(char *str, int l, int *x, int first_p)
 {
 	if ((!l && str[(*x) + 1] == '|' && str[(*x)] == '|' ) 
-		|| (!l && !str[(*x) + 1] && str[(*x)] == '|' ) 
+		|| (!l && (!str[(*x) + 1] || check_p_finel(str,(*x)+1)) && str[(*x)] == '|' ) 
 		|| (!l && str[(*x)] == '|' && (first_p) == *x))
 		return (g_exit_status = 258, print_err(TOKENS_ERROR, str[(*x)++]), 1);
 	else if (!l && (str[(*x)] == '<' || str[(*x)] == '>' ))

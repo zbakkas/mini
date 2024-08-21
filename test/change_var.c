@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 16:22:31 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:38:41 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int check_ambiguous(char *str,  char **envp, int err)
 			
 			// printf("var=%s|\n",var);
 			if(var)
-				re = ft_strjoin(re,var);
+				re = strjoin_parsing(re,var);
 			free(ss);
 		}
 		else
@@ -77,7 +77,7 @@ int check_ambiguous(char *str,  char **envp, int err)
 			add[0]=str[x];
 			// printf("%c|\n",str[x]);
 			add[1]='\0';
-			re = ft_strjoin(re,add);
+			re = strjoin_parsing(re,add);
 		}
 		x++;
 	}
@@ -114,7 +114,7 @@ static char *check_erroe_var(char *str, int x )
 			break ;
 		add[0]=str[x];
 		add[1]='\0';
-		re =ft_strjoin(re,add);
+		re =strjoin_parsing(re,add);
 		x++;
 	}
 	return (re);
