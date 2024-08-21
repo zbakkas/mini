@@ -6,11 +6,20 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 15:20:12 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:18:14 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
+int is_her(char *str,int x)
+{
+	if(str[x]=='<'&& str[x+1]=='<')
+		return 1;
+	if(str[x]=='<'&& str[x-1]=='<')
+		return 1;
+	
+	return 0;
+}
 
 int check_speace_in_var(char *var)
 {
@@ -157,7 +166,7 @@ static void change_var_tow(t_args_var *args,char *str,int *err,char **envp)
 }
 
 // cat << $USER stoop in $USER not value of $USER
-static int	check_and_her_var(char *str, int x, t_args_var args)
+static int	  check_and_her_var(char *str, int x, t_args_var args)
 {
 	int	l;
 
@@ -193,10 +202,13 @@ char	*change_var(char *str, char **envp, int *err)
 	while (str[++args.x])
 	{
 		args.l = chacke_q(str[args.x], &q);
-		if (!args.l && (str[args.x] == '<' || str[args.x]== '>'))
+		
+		// printf("err=%d\n",*err);
+		if (!is_her(str,args.x)&&!args.l && (str[args.x] == '<'  || str[args.x]== '>'))
 			*err = check_ambiguous(check_erroe_var(str, args.x ),envp, *err);
 		if (check_and_her_var(str, args.x, args))
 		{
+			
 			if (str[args.x + 1] == '?')
 				change_var_one(&args.x, args.re, &args.i);
 			else if (!(is_sp(str[args.x + 1]) || str[args.x + 1] == '\''
@@ -204,7 +216,10 @@ char	*change_var(char *str, char **envp, int *err)
 				change_var_tow(&args, str, err, envp);
 		}
 		else
+		{
+			printf("%c--%d--%d\n", str[args.x], args.i, change_var_count(str, envp));
 			args.re[args.i++] = str[args.x];
+		}
 	}
 	printf("i == %d || and %d\n", args.i,change_var_count(str, envp) + 1);
 	args.re[args.i] = '\0';
