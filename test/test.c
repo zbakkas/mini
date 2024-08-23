@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	t_envp		*env=NULL;///hod
 	// t_args args;
 	t_args_n *args_n =NULL;
-	atexit(ll);
+	// atexit(ll);
 
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);

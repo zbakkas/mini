@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 13:40:37 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:09:51 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,13 @@ void		free_double_str(char **str);
 
 int check_wildcards(char *str);
 char **get_name_of_files(char *str );
+int	last_wildcards(char *str, int x);
+char	*chech_be(char *str, int x);
+char	*check_aft(char *str, int x, int xx);
+int	ch_f(char *str, char *name, int *i);
+int	ch_m(char *str, char *name, int *i);
+int	ch_l(char *str, char *name);
+int	ft_strlen_doubl(char **str);
 
 
 #endif

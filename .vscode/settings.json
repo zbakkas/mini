@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "co": "c"
+        "co": "c",
+        "min.h": "c"
     }
 }
