@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 15:08:12 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 17:39:47 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	change_var_tow(t_args_var *args, char *str, int *err, char **envp)
 	j = args->x;
 	ss = get_name_var(str + args->x, &(*args).x);
 	tmp = ft_strdup(search_in_env(envp, ss));
-	var = ft_strtrim(tmp, "\t ");
+	var = ft_strtrim(tmp, "\t ", args->l);
 	free(ss);
 	j = 0;
 	if (var && var[j] && args->l != 2)

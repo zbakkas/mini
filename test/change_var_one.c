@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 15:11:05 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 17:34:48 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 
 	ss = get_name_var(str + *x, x);
 	tmp = ft_strdup(search_in_env(envp, ss));
-	var = ft_strtrim(tmp, "\t ");
+	var = ft_strtrim(tmp, "\t ", l);
 	i = 0;
 	free(ss);
 	j = 0;
