@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 13:00:52 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 13:40:37 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,9 @@ int			check_ambiguous(char *str, char **envp, int err);
 char		*check_erroe_var(char *str, int x );
 char		*strjoin_parsing(char *start, char *buff);
 void		free_double_str(char **str);
+
+int check_wildcards(char *str);
+char **get_name_of_files(char *str );
+
 
 #endif

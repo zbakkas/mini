@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 20:36:56 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 15:08:12 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ static void	change_var_tow(t_args_var *args, char *str, int *err, char **envp)
 	int		j;
 	char	*ss;
 	char	*var;
+	char	*tmp;
 
 	j = args->x;
 	ss = get_name_var(str + args->x, &(*args).x);
-	var = search_in_env(envp, ss);
+	tmp = ft_strdup(search_in_env(envp, ss));
+	var = ft_strtrim(tmp, "\t ");
 	free(ss);
 	j = 0;
 	if (var && var[j] && args->l != 2)
@@ -60,6 +62,8 @@ static void	change_var_tow(t_args_var *args, char *str, int *err, char **envp)
 			args->re[args->i++] = '"';
 		j++;
 	}
+	free(tmp);
+	free(var);
 }
 
 // cat << $USER stoop in $USER not value of $USER
