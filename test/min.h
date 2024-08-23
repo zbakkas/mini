@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 20:36:56 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/22 15:43:32 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <readline/readline.h>
 #include "libft/libft.h"
 #include <stdbool.h>
+
+#include <dirent.h>
 
 // #ifndef g_exit_status
 // #define g_exit_status
