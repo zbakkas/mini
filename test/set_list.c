@@ -6,13 +6,13 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 20:59:58 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 18:45:14 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 12:53:50 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
 
-static void	free_double_str(char **str)
+void	free_double_str(char **str)
 {
 	int	x;
 

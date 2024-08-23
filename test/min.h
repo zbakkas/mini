@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/22 15:43:32 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 13:00:52 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_args_n	*ft_lstnew_one(char **str);
 void		ft_lstiterr(t_args_n *lst);
 void		clear_list(t_args_n **lst);
 
-char		*whithout_q(char *str);
+char		*whithout_q(char *str,int is_wildcardss);
 
 int			check_errors(char *str, int err);
 int			chacke_q(char c, t_quote *q);
@@ -116,5 +116,6 @@ int			is_sp(char c);
 int			check_ambiguous(char *str, char **envp, int err);
 char		*check_erroe_var(char *str, int x );
 char		*strjoin_parsing(char *start, char *buff);
+void		free_double_str(char **str);
 
 #endif

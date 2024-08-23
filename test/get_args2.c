@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:38 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 12:44:57 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 13:03:57 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	whithout_q_count(char *str, int x)
 	return (c);
 }
 
-char	*whithout_q(char *str)
+char	*whithout_q(char *str,int is_wildcardss)
 {
 	char	*re;
 	int		x;
@@ -61,6 +61,8 @@ char	*whithout_q(char *str)
 		x++;
 	}
 	re[c] = '\0';
+	if(is_wildcardss)
+		free(str);
 	return (re);
 }
 
@@ -184,14 +186,14 @@ int is_equal(char *str, char *name)
 			i = -1;
 		if(!l && str[x]=='*' &&x-1 >= 0 && i!=-1)
 		{
-			ss = whithout_q(chech_be(str,x));
+			ss = whithout_q(chech_be(str,x),1);
 			if(hhh(ss,name,&i))
 				return (free(ss), 0);
 			free(ss);
 		}
 		else if(i==-1)
 		{
-			ss = whithout_q(check_aft(str,x,x));
+			ss = whithout_q(check_aft(str,x,x),1);
 			if(hhhh(ss,name))
 				return (free(ss), 0);
 			free(ss);
@@ -224,7 +226,7 @@ char **get_name_of_files(char *str )
 		// entry = readdir(dp);
     }
 	re =ft_split(str_j,' ');
-
+	free(str_j);
     closedir(dp);
 	return re;
 }
@@ -270,8 +272,6 @@ static int	get_args_count(char **str)
 	c = 0;
 	while (str[x])
 	{
-	// printf("str=%s",str[x]);
-		
 		if (str[x + 1] && (ft_strncmp(str[x], "<", 2) == 0
 				|| ft_strncmp(str[x], ">", 2) == 0
 				|| ft_strncmp(str[x], "<<", 3) == 0
@@ -284,6 +284,7 @@ static int	get_args_count(char **str)
 				c+= ft_strlen_doubl(ss);
 			else
 				c++;
+			free_double_str(ss);
 		}
 		else
 			c++;
@@ -322,10 +323,11 @@ char	**get_args(char **str)
 				}
 			}
 			else
-				re[c++] = whithout_q(str[x]);
+				re[c++] = whithout_q(str[x],0);
+			free(ss);
 		}
 		else
-			re[c++] = whithout_q(str[x]);
+			re[c++] = whithout_q(str[x],0);
 		x++;
 	}
 	re[c] = NULL;
