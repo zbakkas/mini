@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 17:34:48 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/24 11:06:25 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,21 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 	char	*var;
 	int		i;
 	char	*ss;
-	char	*tmp;
 
 	ss = get_name_var(str + *x, x);
-	tmp = ft_strdup(search_in_env(envp, ss));
-	var = ft_strtrim(tmp, "\t ", l);
+	var = ft_strdup(search_in_env(envp, ss));
 	i = 0;
 	free(ss);
 	j = 0;
-	if (var && var[j] && l != 2)
-		i++;
 	while (var && var[j])
 	{
-		if (j - 1 >= 0 && l != 2 && is_sp(var[j - 1]) && !is_sp(var[j]))
-			i++;
+		if (!l && (var[j] == '\'' || var[j] == '<' 
+				|| var[j] == '>' || var[j] == '|'))
+			i += 2;
 		i++;
-		if (l != 2 && !is_sp(var[j]) && (is_sp(var[j + 1])
-				|| var[j + 1] == '\0'))
-			i++;
 		j++;
 	}
-	return (free(var), free(tmp), i);
+	return (i);
 }
 
 // cat << $USER stoop in $USER not value of $USER
