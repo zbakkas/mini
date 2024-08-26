@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:21:41 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/24 15:54:52 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/26 11:49:14 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	is_all_space(char *str)
 	int	x;
 
 	x = 0;
+	if (!str)
+		return (0);
 	while (is_sp(str[x]))
 	{
 		x++;

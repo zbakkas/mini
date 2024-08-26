@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:23:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 18:42:17 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/26 14:34:51 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,17 @@ char	*get_name_var(char *str, int *j)
 			is_v = 1;
 	}
 	return (re[i] = '\0', (re));
+}
+
+void	change_var_tow_one(t_args_var *args, char *var, int j)
+{
+	if (var[j] == '"')
+		args->re[args->i++] = '\'';
+	else
+		args->re[args->i++] = '"';
+	args->re[args->i++] = var[j];
+	if (var[j] == '"')
+		args->re[args->i++] = '\'';
+	else
+		args->re[args->i++] = '"';
 }

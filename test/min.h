@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 16:09:51 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/26 14:35:03 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,8 @@ int	ch_m(char *str, char *name, int *i);
 int	ch_l(char *str, char *name);
 int	ft_strlen_doubl(char **str);
 
+
+int check_doub(char *str);
+void	change_var_tow_one(t_args_var *args, char *var, int j);
 
 #endif

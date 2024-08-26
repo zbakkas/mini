@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:27:17 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/24 11:06:25 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/08/26 14:29:37 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ static int	change_var_count_one(int *x)
 	return (i);
 }
 
+int	check_doub(char *str)
+{
+	int	x;
+
+	x = 0;
+	while (str[x])
+	{
+		if (str[x] == '"')
+			return (1);
+		x++;
+	}
+	return (0);
+}
+
 static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 {
 	int		j;
@@ -33,14 +47,16 @@ static int	change_var_count_tow(char **envp, int l, int *x, char *str)
 	char	*ss;
 
 	ss = get_name_var(str + *x, x);
-	var = ft_strdup(search_in_env(envp, ss));
+	var = search_in_env(envp, ss);
 	i = 0;
 	free(ss);
 	j = 0;
 	while (var && var[j])
 	{
-		if (!l && (var[j] == '\'' || var[j] == '<' 
-				|| var[j] == '>' || var[j] == '|'))
+		if (check_doub(var)&& l==2 && (var[j] == '"'))
+			i++;
+		else if (!l && (var[j] == '\'' || var[j] == '<' 
+				|| var[j] == '>' || var[j] == '|' || var[j] == '"'))
 			i += 2;
 		i++;
 		j++;
