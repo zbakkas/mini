@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:21:41 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/26 11:49:14 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/04 14:42:36 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	check_ambiguous_one(char *str, char **envp, t_args_var_err *args)
 		if (!is_all_space(var))
 		{
 			if (check_speace_in_var(var))
-				return (free(ss), free(str), free(args->re), 1);
+				return (free(ss), free(args->re), 1);
 			if (var)
 				args->re = strjoin_parsing(args->re, var);
 		}
@@ -91,14 +91,13 @@ static int	check_ambiguous_one(char *str, char **envp, t_args_var_err *args)
 	return (0);
 }
 
-int	check_ambiguous(char *str, char **envp, int err)
+int	check_ambiguous(char *str, char **envp)
 {
+	// printf("%s\n",str);
 	t_args_var_err	args;
 
 	if (!str)
 		return (0);
-	if (err)
-		return (1);
 	args.x = 0;
 	args.re = NULL;
 	args.q.in_double_quote = 0;
@@ -110,8 +109,8 @@ int	check_ambiguous(char *str, char **envp, int err)
 		args.x++;
 	}
 	if (!args.re)
-		return (free(str), free(args.re), 1);
-	return (free(str), free(args.re), 0);
+		return (free(args.re), 1);
+	return (free(args.re), 0);
 }
 
 char	*check_erroe_var(char *str, int x )

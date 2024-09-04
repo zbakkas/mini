@@ -11,7 +11,7 @@ void signal_handler(int signal)
     if (signal == SIGINT) {
         printf("\n");
         rl_on_new_line();
-        rl_replace_line("", 0);
+        // rl_replace_line("", 0);
         rl_redisplay();
 		/// g_exit_status 130;
     }
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	t_envp		*env=NULL;///hod
 	// t_args args;
 	t_args_n *args_n =NULL;
-	atexit(ll);
+	// atexit(ll);
 
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);

@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:38 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 16:25:23 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/03 20:00:55 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**get_args(char **str)
 	re = (char **)malloc((get_args_count(str) + 1) * sizeof(char *));
 	while (str[x])
 	{
-		if (str[x + 1] && (ft_strncmp(str[x], "<", 2) == 0
+		if ((ft_strncmp(str[x], "<", 2) == 0
 				|| ft_strncmp(str[x], ">", 2) == 0
 				|| ft_strncmp(str[x], "<<", 3) == 0
 				|| ft_strncmp(str[x], ">>", 3) == 0))
@@ -89,7 +89,8 @@ char	**get_args(char **str)
 		}
 		else
 			re[c++] = whithout_q(str[x], 0);
-		x++;
+		if(str[x])
+			x++;
 	}
 	re[c] = NULL;
 	return (re);

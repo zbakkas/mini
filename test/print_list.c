@@ -20,19 +20,14 @@ void	ft_lstiterr(t_args_n *lst)
             // f("arg",lst->arguments[i++]);
         }
         i =0;
-        while (lst->inp[i].inp)
+        while (lst->inp[i].last)
         {
-            printf("inp_file[%d]==>\033[0;32m%s\033[0m<==\n",i,lst->inp[i].inp);            
-            printf("inp_type[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->inp[i].is_h);   
+            printf("file_name[%d]==>\033[0;32m%s\033[0m<==\n",i,lst->inp[i].inp);            
+            printf("file_type[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->inp[i].typ);   
+            printf("file_am[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->inp[i].is_am); 
             i++;     
         }
-        i =0;
-        while (lst->out[i].out)
-        {
-            printf("out_file[%d]==>\033[0;32m%s\033[0m<==\n",i,lst->out[i].out);            
-            printf("out_type[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->out[i].is_a);   
-            i++;     
-        }
+    
         
 
 

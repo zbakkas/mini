@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 15:45:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/26 14:34:43 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/04 13:11:25 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,42 @@ static void	change_var_tow(t_args_var *args, char *str, char **envp)
 // cat << $USER stoop in $USER not value of $USER
 static int	check_and_her_var(char *str, int x, t_args_var args)
 {
-	int	l;
+	
+	// printf("str_var=%s,x=%d\n",str,x);
 
-	l = 0;
-	while (x >= 0)
+	if(x > 0)
+		x--;
+	if(x>0 &&str[x] != '<' &&  str[x] != '>')
 	{
-		while (x >= 0 && (is_sp(str[x])))
+		while (x>=0)
 		{
+			if(is_sp(str[x]))
+			{
+				break ;
+			}
 			x--;
 		}
-		if (x >= 0 && str[x] == '<' && x - 1 >= 0 && str[x - 1] == '<')
-			l = 1;
-		x--;
+		
 	}
-	if (!l && str[args.x] == '$' && args.l != 1 && str[args.x + 1]
+	if ( str[args.x] == '$' && args.l != 1 && str[args.x + 1]
 		&& !is_sp(str[args.x + 1]) && str[args.x + 1] != '$')
-		return (1);
+		while (x >= 0)
+		{
+			
+
+			if (x >= 0 && (str[x] == '<' ||  str[x] == '>'))
+				return (0);
+			if(!is_sp(str[x]))
+			{
+				return (1);
+			}
+			x--;
+		}
+	
 	return (0);
 }
-
-char	*change_var(char *str, char **envp, int *err)
+// $arg < $arg < $ARG $arg
+char	*change_var(char *str, char **envp)
 {
 	t_args_var	args;
 
@@ -100,9 +116,9 @@ char	*change_var(char *str, char **envp, int *err)
 	while (str[++args.x])
 	{
 		args.l = chacke_q(str[args.x], &args.q);
-		if (!is_her(str, args.x) && !args.l 
-			&& (str[args.x] == '<' || str[args.x] == '>'))
-			*err = check_ambiguous(check_erroe_var(str, args.x), envp, *err);
+		// if (!is_her(str, args.x) && !args.l 
+		// 	&& (str[args.x] == '<' || str[args.x] == '>'))
+		// 	*err = check_ambiguous(check_erroe_var(str, args.x), envp, *err);
 		if (check_and_her_var(str, args.x, args))
 		{
 			if (str[args.x + 1] == '?')

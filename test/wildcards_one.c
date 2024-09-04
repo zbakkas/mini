@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:52:21 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/23 16:10:44 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/04 14:38:14 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	ch_l(char *str, char *name)
 	int	x;
 	int	i;
 
+	x = 0;
+	i = 0;
 	x = ft_strlen(str);
 	i = ft_strlen(name);
 	while (x > 0)

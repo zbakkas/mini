@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 21:37:16 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/08/21 20:29:36 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/04 13:37:12 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ void	clear_list(t_args_n **lst)
 			free((*lst)->arguments[i++]);
 		free((*lst)->arguments);
 		i = 0;
-		while ((*lst)->inp[i].inp)
+		while ((*lst)->inp[i].last)
 			free((*lst)->inp[i++].inp);
 		free((*lst)->inp);
 		i = 0;
-		while ((*lst)->out[i].out)
-			free((*lst)->out[i++].out);
-		free((*lst)->out);
 		free(*lst);
 		*lst = nexttte;
 	}
