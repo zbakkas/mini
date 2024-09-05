@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:38 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/09/03 20:00:55 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/05 10:14:33 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ char	**get_args(char **str)
 //     x++;
 // }
 // x =0;
-// t_inp *inp =get_inp(str);
+// t_files *inp =get_files(str);
 // while (inp[x].inp)
 // {
 //     printf("inp file [%d]:%s\n",x,inp[x].inp);

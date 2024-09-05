@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 20:59:58 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/09/04 14:42:54 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/05 10:43:56 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ t_args_n	*ft_lstnew_one(char **str,char **envp)
 	if (!new_node)
 		return (NULL);
 	new_node->arguments = get_args(str);
-	new_node->inp = get_inp(str,envp);
+	new_node->inp = get_files(str,envp);
+	new_node->in =  get_inp(new_node->inp);
+	new_node->out = get_out(new_node->inp);
 	new_node->next = NULL;
 	return (new_node);
 }

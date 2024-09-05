@@ -6,13 +6,13 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 21:37:16 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/09/04 13:37:12 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/05 10:28:26 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "min.h"
 
-void	remove_file(t_inp *inp);
+void	remove_file(t_files *inp);
 
 void	clear_list(t_args_n **lst)
 {
@@ -31,7 +31,7 @@ void	clear_list(t_args_n **lst)
 		free((*lst)->arguments);
 		i = 0;
 		while ((*lst)->inp[i].last)
-			free((*lst)->inp[i++].inp);
+			free((*lst)->inp[i++].file);
 		free((*lst)->inp);
 		i = 0;
 		free(*lst);

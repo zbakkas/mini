@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:37:51 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/09/04 14:40:31 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/05 10:02:22 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,12 @@ char	**get_name_of_files(char *str)
 		if (entry && entry->d_name[0] != '.' && is_equal(str, entry->d_name))
 		{
 			str_j = strjoin_parsing(str_j, entry->d_name);
-			str_j = strjoin_parsing(str_j, " ");
+			str_j = strjoin_parsing(str_j, "/");
 		}
 		entry = readdir(dp);
 	}
-	re = ft_split(str_j, ' ');
+	printf("%s\n",str_j);
+	re = ft_split(str_j, '/');
 	swapp(ft_strlen_doubl(re),re);
 	free(str_j);
 	closedir(dp);

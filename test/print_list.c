@@ -22,7 +22,7 @@ void	ft_lstiterr(t_args_n *lst)
         i =0;
         while (lst->inp[i].last)
         {
-            printf("file_name[%d]==>\033[0;32m%s\033[0m<==\n",i,lst->inp[i].inp);            
+            printf("file_name[%d]==>\033[0;32m%s\033[0m<==\n",i,lst->inp[i].file);            
             printf("file_type[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->inp[i].typ);   
             printf("file_am[%d]==>\033[0;32m%d\033[0m<==\n",i,lst->inp[i].is_am); 
             i++;     

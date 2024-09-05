@@ -6,7 +6,7 @@
 /*   By: zbakkas <zouhirbakkas@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:35:37 by zbakkas           #+#    #+#             */
-/*   Updated: 2024/09/04 14:29:09 by zbakkas          ###   ########.fr       */
+/*   Updated: 2024/09/05 10:58:05 by zbakkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,30 @@ typedef struct s_quote
 
 }	t_quote;
 
-typedef struct s_inp
+typedef struct s_files
 {
-	char	*inp;
+	char	*file;
 	int		typ;
 	char	*last;
 	bool	is_q;
 	bool	is_am;
-}	t_inp;
+}	t_files;
 
-// typedef struct s_out
-// {
-// 	char	*out;
-// 	bool	is_a;
-// 	char	*last;
-// 	bool	is_am;
-// }	t_out;
+
+typedef struct s_out
+{
+	char	*out;
+	bool	is_a;
+	bool	is_am;
+}	t_out;
+
+typedef struct s_in
+{
+	char	*in;
+	bool	is_h;
+	bool	is_q;
+	bool	is_am;
+}	t_in;
 ///////change_var////
 typedef struct s_args_var
 {
@@ -88,7 +96,9 @@ typedef struct s_args_var
 typedef struct s_args_n
 {
 	char			**arguments;
-	t_inp			*inp;
+	t_files			*inp;
+	t_in 			*in;
+	t_out			*out;
 	struct s_args_n	*next;
 }	t_args_n;
 
@@ -102,7 +112,7 @@ char		*get_name_var(char *str, int *j);
 char		*search_in_env(char **envp, char *str);
 
 char		**get_args(char **str);
-t_inp		*get_inp(char **str,char **envp);
+t_files		*get_files(char **str,char **envp);
 
 t_args_n	*initialization_list(char *line, char **envp);
 void		ft_lstadd_backk(t_args_n **lst, t_args_n *new);
@@ -134,5 +144,6 @@ int	ft_strlen_doubl(char **str);
 
 int check_doub(char *str);
 void	change_var_tow_one(t_args_var *args, char *var, int j);
-
+t_out *get_out(t_files *files);
+t_in *get_inp(t_files *files);
 #endif
